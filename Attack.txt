@@ -1,0 +1,69 @@
+ICMP flood Attack:
+	Rule for prevention-
+		sudo nano /etc/ufw/before.rules
+		-A ufw-before-input -p icmp --icmp-type echo-request -s 133.228.98.1 -j DROP
+	sudo ufw reload
+	sudo ufw status
+	sudo ufw enable
+	Attack-
+		sudo hping3 -1 --flood -a 133.228.98.1 133.228.98.3
+	Verifying if the attacking is prevented-
+		sudo cat /var/log/ufw.log
+	File: icmp_ufw_log.txt
+ICMP Smurf Attack:
+	Rule for prevention-
+		-A ufw-before-input -s 133.228.98.0/24 -p icmp -j ACCEPT
+		-A ufw-before-input -s 133.228.99.0/24 -p icmp -j DROP
+	sudo hping3 -1 --flood -a 133.228.98.1 133.228.98.3	-Accept these packets
+	sudo hping3 -1 --flood -a 133.228.99.2 133.228.98.3	-Reject these
+	Verifying if the attacking is prevented-
+		sudo cat /var/log/ufw.log
+	File: icmp_ufw_smurf.txt
+UDP flood Attack:
+	Rule-
+		sudo ufw insert 1 deny from 133.228.98.1 to any port 2734 proto udp
+		sudo ufw insert 1 reject from 133.228.98.1 to any port 2734 proto udp
+	Attack-
+		sudo hping3 -u --flood -p 2734 133.228.98.3
+	Verifying if the attacking is prevented-
+		sudo cat /var/log/ufw.log
+		sudo tcpdump -i ens192 udp port 2734 and src 133.228.98.1 -w udpprevent.pcap
+	sudo ufw delete 1
+	sudo ufw allow ssh
+	File: udp_log
+HTTP Slowloris Attack:
+	while true; do wget http://133.228.98.3; sleep 6; done
+	while true; do wget http://133.228.98.3; sleep 4; done
+	Verifying if the attacking is prevented-
+		sudo cat /var/log/ufw.log
+		sudo tcpdump -nn -r slow.pcap tcp | wc -l 
+	File: HTTP_ufw.txt, HTTP_ufw_log.txt
+TCP SYN Flooding:
+	sudo chmod +x script.sh
+	./script.sh
+	script.sh:
+			N=500
+			URL="http://133.228.98.3/var/www/html/umbc.png"
+			for (( i=1; i<=$N; i++ )); do
+  				curl -s -o /dev/null $URL &
+			done
+			wait
+	Rule-
+		sudo iptables -A INPUT -i eth1 -s 133.228.98.3 -p tcp --tcp-flags SYN,ACK,FIN,RST SYN,ACK -j DROP
+	netstat -nat | grep :80 | grep SYN_RECV
+	netstat -nat | grep :80 | grep SYN_RECV | wc -l
+	sudo iptables -D INPUT -i eth1 -s 133.228.98.3 -p tcp --tcp-flags SYN,ACK,FIN,RST SYN,ACK -j DROP
+	Verifying if the attacking is prevented-
+		sudo cat /var/log/ufw.log
+		sudo tcpdump -i ens192 tcp port 80 and src 133.228.98.1 -w tcpsyn.pcap
+	netstat -nat | grep :80| grep ESTABLISHED| wc -l
+	File: TCPSYN_ufw_log.txt
+
+
+References:
+
+https://manpages.ubuntu.com/manpages/jammy/en/man8/ufw.8.html
+https://wiki.ubuntu.com/UncomplicatedFirewall
+https://www.digitalocean.com/community/tutorials/ufw-essentials-common-firewall-rules-and-commands
+https://www.kali.org/tools/hping3/
+https://nmap.org/book/man.html

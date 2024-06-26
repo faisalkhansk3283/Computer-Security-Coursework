@@ -1,0 +1,13 @@
+reading from file tcpdump_http2.pcap, link-type EN10MB (Ethernet), snapshot length 262144
+02:12:59.549944 IP 133.228.98.2.39472 > 133.228.98.3.80: Flags [P.], seq 3649656869:3649657243, ack 2243776310, win 502, options [nop,nop,TS val 2641325901 ecr 2796807413], length 374: HTTP: GET /private/team.html HTTP/1.1
+02:12:59.549959 IP 133.228.98.2.39472 > 133.228.98.3.80: Flags [P.], seq 0:374, ack 1, win 502, options [nop,nop,TS val 2641325901 ecr 2796807413], length 374: HTTP: GET /private/team.html HTTP/1.1
+02:12:59.550797 IP 133.228.98.3.80 > 133.228.98.2.39472: Flags [P.], seq 1:743, ack 374, win 507, options [nop,nop,TS val 2796807437 ecr 2641325901], length 742: HTTP: HTTP/1.1 401 Unauthorized
+02:12:59.550798 IP 133.228.98.3.80 > 133.228.98.2.39472: Flags [P.], seq 1:743, ack 374, win 507, options [nop,nop,TS val 2796807437 ecr 2641325901], length 742: HTTP: HTTP/1.1 401 Unauthorized
+02:13:07.393720 IP 133.228.98.2.37792 > 133.228.98.3.80: Flags [P.], seq 1864063997:1864064410, ack 2363101963, win 502, options [nop,nop,TS val 2641333745 ecr 2796815261], length 413: HTTP: GET /private/team.html HTTP/1.1
+02:13:07.393723 IP 133.228.98.2.37792 > 133.228.98.3.80: Flags [P.], seq 0:413, ack 1, win 502, options [nop,nop,TS val 2641333745 ecr 2796815261], length 413: HTTP: GET /private/team.html HTTP/1.1
+02:13:07.394582 IP 133.228.98.3.80 > 133.228.98.2.37792: Flags [P.], seq 1:576, ack 413, win 506, options [nop,nop,TS val 2796815281 ecr 2641333745], length 575: HTTP: HTTP/1.1 200 OK
+02:13:07.394584 IP 133.228.98.3.80 > 133.228.98.2.37792: Flags [P.], seq 1:576, ack 413, win 506, options [nop,nop,TS val 2796815281 ecr 2641333745], length 575: HTTP: HTTP/1.1 200 OK
+02:13:07.477742 IP 133.228.98.2.37792 > 133.228.98.3.80: Flags [P.], seq 413:750, ack 576, win 501, options [nop,nop,TS val 2641333829 ecr 2796815281], length 337: HTTP: GET /favicon.ico HTTP/1.1
+02:13:07.477752 IP 133.228.98.2.37792 > 133.228.98.3.80: Flags [P.], seq 413:750, ack 576, win 501, options [nop,nop,TS val 2641333829 ecr 2796815281], length 337: HTTP: GET /favicon.ico HTTP/1.1
+02:13:07.478158 IP 133.228.98.3.80 > 133.228.98.2.37792: Flags [P.], seq 576:1077, ack 750, win 504, options [nop,nop,TS val 2796815365 ecr 2641333829], length 501: HTTP: HTTP/1.1 404 Not Found
+02:13:07.478160 IP 133.228.98.3.80 > 133.228.98.2.37792: Flags [P.], seq 576:1077, ack 750, win 504, options [nop,nop,TS val 2796815365 ecr 2641333829], length 501: HTTP: HTTP/1.1 404 Not Found

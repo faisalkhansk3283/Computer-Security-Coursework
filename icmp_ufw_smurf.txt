@@ -1,0 +1,34 @@
+kali-133.228.98.1> sudo hping3 –icmp –flood 133.228.98.3 -a 133.228.99.2
+[sudo] password for crsuser:
+hping3: you must specify only one target host at a time
+
+kali-133.228.98.1> sudo hping3 -1 --flood -a 133.228.99.2 133.228.98.3
+HPING 133.228.98.3 (eth1 133.228.98.3): icmp mode set, 28 headers + 0 data bytes
+hping in flood mode, no replies will be shown
+^C
+--- 133.228.98.3 hping statistic ---
+285867 packets transmitted, 0 packets received, 100% packet loss
+round-trip min/avg/max = 0.0/0.0/0.0 ms
+
+Apr 15 02:34:39 crsuser-ub20 kernel: [2888556.019601] [UFW BLOCK] IN=ens192 OUT= MAC=00:50:56:95:25:4f:00:50:56:95:d9:bc:08:00 SRC=133.228.89.1 DST=133.228.98.3 LEN=60 TOS=0x00 PREC=0x00 TTL=64 ID=63654 DF PROTO=TCP SPT=43070 DPT=80 WINDOW=64240 RES=0x00 SYN URGP=0
+Apr 15 02:34:41 crsuser-ub20 kernel: [2888557.672026] [UFW BLOCK] IN=ens192 OUT= MAC=00:50:56:95:25:4f:00:50:56:95:d9:bc:08:00 SRC=133.228.89.1 DST=133.228.98.3 LEN=60 TOS=0x00 PREC=0x00 TTL=64 ID=5959 DF PROTO=TCP SPT=43072 DPT=80 WINDOW=64240 RES=0x00 SYN URGP=0
+Apr 15 02:34:53 crsuser-ub20 kernel: [2888570.325720] [UFW BLOCK] IN=ens192 OUT= MAC=00:50:56:95:25:4f:00:50:56:95:d9:bc:08:00 SRC=133.228.89.1 DST=133.228.98.3 LEN=60 TOS=0x00 PREC=0x00 TTL=64 ID=15629 DF PROTO=TCP SPT=47284 DPT=443 WINDOW=64240 RES=0x00 SYN URGP=0
+Apr 15 02:34:54 crsuser-ub20 kernel: [2888570.446709] [UFW BLOCK] IN=ens192 OUT= MAC=00:50:56:95:25:4f:00:50:56:95:d9:bc:08:00 SRC=133.228.89.1 DST=133.228.98.3 LEN=60 TOS=0x00 PREC=0x00 TTL=64 ID=15672 DF PROTO=TCP SPT=47294 DPT=443 WINDOW=64240 RES=0x00 SYN URGP=0
+
+
+# Accepting from same local subnet
+
+kali-133.228.98.1> sudo hping3 -1 --flood -a 133.228.98.1 133.228.98.3
+HPING 133.228.98.3 (eth1 133.228.98.3): icmp mode set, 28 headers + 0 data bytes
+hping in flood mode, no replies will be shown
+^C
+--- 133.228.98.3 hping statistic ---
+88332 packets transmitted, 0 packets received, 100% packet loss
+round-trip min/avg/max = 0.0/0.0/0.0 ms
+
+ub20-133.228.98.3> sudo tcpdump -n -i ens192 -s0 -w icmp_ufw_smurf.pcap host 133.228.98.3 and icmp
+tcpdump: listening on ens192, link-type EN10MB (Ethernet), capture size 262144 bytes
+^C176666 packets captured
+176666 packets received by filter
+0 packets dropped by kernel
+ub20-133.228.98.3>

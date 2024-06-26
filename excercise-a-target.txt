@@ -1,0 +1,28 @@
+Script started on 2023-03-18 12:21:08-04:00 [TERM="xterm" TTY="/dev/pts/0" COLUMNS="80" LINES="24"]
+ub20-133.228.98.3> tcpdump -n -i ens192 -s0 -w icmpflood.pcap host 133.228.98.1  and icmp
+tcpdump: ens192: You don't have permission to capture on that device
+(socket: Operation not permitted)
+ub20-133.228.98.3> ^C
+ub20-133.228.98.3> tcpdump -n -i ens192 -s0 -w icmpflood.pcap host 133.228.98.1 and icmp[A[C[C[C[C[C[C[C[C[C[C[Cls -la[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ctcpdump -n -i ens192 -s0 -w icmpflood.pcap host 133.228.98.1 and icmp[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cstcpdump -n -i ens192 -s0 -w icmpflood.pcap host 133.228.98.1 [1@a[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cutcpdump -n -i ens192 -s0 -w icmpflood.pcap host 133.228.98.1[1@ [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cdtcpdump -n -i ens192 -s0 -w icmpflood.pcap host 133.228.98.[1@1[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cotcpdump -n -i ens192 -s0 -w icmpflood.pcap host 133.228.98[1@.[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C tcpdump -n -i ens192 -s0 -w icmpflood.pcap host 133.228.9[1@8[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+
+[sudo] password for crsuser: 
+tcpdump: listening on ens192, link-type EN10MB (Ethernet), capture size 262144 bytes
+^C200000 packets captured
+200000 packets received by filter
+0 packets dropped by kernel
+ub20-133.228.98.3> tcpdump -n -r icmpflood.pcap | grep "echo request" | wc -l
+reading from file icmpflood.pcap, link-type EN10MB (Ethernet)
+100000
+ub20-133.228.98.3> tcpdump -n -r icmpflood.pcap | grep "echo request" | wc -l
+reading from file icmpflood.pcap, link-type EN10MB (Ethernet)
+100000
+ub20-133.228.98.3> ls -l Downloads/
+total 0
+ub20-133.228.98.3> ls
+[0m[01;34mDesktop[0m    [01;34mDownloads[0m        icmpflood.pcap  [01;34mPictures[0m  [01;34mTemplates[0m
+[01;34mDocuments[0m  excercise-a.txt  [01;34mMusic[0m           [01;34mPublic[0m    [01;34mVideos[0m
+ub20-133.228.98.3> ls -/[Kl excercise-a.txt
+-rw-rw-r-- 1 crsuser crsuser 0 Mar 18 12:21 excercise-a.txt
+ub20-133.228.98.3> ls -l excercise-a.txt[K -l Downloads/tcpdump -n -r icmpflood.pcap | grep "echo request" | wc -l[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Csudo tcpdump -n -i ens192 -s0 -w icmpflood.pcap host 133.228.98.1 and icmp[A[C[C[C[C[C[Ctcpdump -n -i ens192 -s0 -w icmpflood.pcap host 133.228.98.1 a[5P[C[C[C[C[C[C[C[A[C[C[C[C[C[C[C[C[C[C[Cls -la[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[CPublic/-l Downloads/[Krm -rf icmp.pcap icmpflood.pcap index.html [C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cls[Kping 133.228.80.312.1[10Pip addrnc -l 12345sudo tcpdump -n -i ens192 icmp or port 22222q2[K[6Pudp[Kls[Kgrep echo /etc/services [C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Csudo systemctl status echod[Kls[Kls -l /var/www/html[12Psudo lssystemctl status echod[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[3Pgrep echo /etc/services [C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Csudo ls[Ktcpdump -n -i ens192 icmp or udpport 2222q2[1P2[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cnc -l 12345[K[4Pip addrping 133.228.82.10.13ls[Krm -rf icmp.pcap icmpflood.pcap index.html [C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cls -l[K Downloads/[6PPublic/[4P-lat

@@ -1,0 +1,122 @@
+Script started on 2023-03-19 01:34:36-04:00 [TERM="xterm-256color" TTY="/dev/pts/1" COLUMNS="110" LINES="26"]
+kali-133.228.98.1> nano smurfattacktcp.sh
+
+kali-133.228.98.1> sudo ls
+[sudo] password for crsuser:
+Desktop    Downloads        excercise-c.txt  Music     Public          smurfattacktcp.sh  Templates
+Documents  excercise-b.txt  excercise-d.txt  Pictures  smurfattack.sh  smurfattackudp.sh  Videos
+
+kali-133.228.98.1> chmod +x smurfattacktcp.sh
+
+kali-133.228.98.1> ./smurfattacktcp.sh
+
+kali-133.228.98.1> HPING 133.228.85.2 (eth1 133.228.85.2): S set, 40 headers + 0 data bytesHPING 133.228.85.3 (eth1 133.228.85.3): S set, 40 headers + 0 data bytesHPING 133.228.87.1 (eth1 133.228.87.1): S set, 40 headers + 0 data bytesHPING 133.228.86.2 (eth1 133.228.86.2): S set, 40 headers + 0 data bytesHPING 133.228.86.3 (eth1 133.228.86.3): S set, 40 headers + 0 data bytesHPING 133.228.84.2 (eth1 133.228.84.2): S set, 40 headers + 0 data bytesHPING 133.228.85.1 (eth1 133.228.85.1): S set, 40 headers + 0 data bytesHPING 133.228.86.1 (eth1 133.228.86.1): S set, 40 headers + 0 data bytesHPING 133.228.84.1 (eth1 133.228.84.1): S set, 40 headers + 0 data bytes
+HPING 133.228.84.3 (eth1 133.228.84.3): S set, 40 headers + 0 data bytes
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--- 133.228.85.1 hping statistic ---
+--- 133.228.85.3 hping statistic ---
+--- 133.228.86.2 hping statistic ---5 packets transmitted, 0 packets received, 100% packet loss5 packets transmitted, 0 packets received, 100% packet loss
+5 packets transmitted, 0 packets received, 100% packet loss
+round-trip min/avg/max = 0.0/0.0/0.0 ms
+round-trip min/avg/max = 0.0/0.0/0.0 ms
+
+round-trip min/avg/max = 0.0/0.0/0.0 ms
+
+
+--- 133.228.84.2 hping statistic ---
+5 packets transmitted, 0 packets received, 100% packet loss
+round-trip min/avg/max = 0.0/0.0/0.0 ms
+
+
+--- 133.228.86.1 hping statistic ---
+--- 133.228.87.1 hping statistic ---5 packets transmitted, 0 packets received, 100% packet loss
+--- 133.228.84.3 hping statistic ---
+5 packets transmitted, 0 packets received, 100% packet loss
+5 packets transmitted, 0 packets received, 100% packet lossround-trip min/avg/max = 0.0/0.0/0.0 ms
+round-trip min/avg/max = 0.0/0.0/0.0 ms
+
+
+--- 133.228.84.1 hping statistic ---
+--- 133.228.86.3 hping statistic ---round-trip min/avg/max = 0.0/0.0/0.0 ms
+5 packets transmitted, 0 packets received, 100% packet loss
+5 packets transmitted, 0 packets received, 100% packet loss
+round-trip min/avg/max = 0.0/0.0/0.0 ms
+round-trip min/avg/max = 0.0/0.0/0.0 ms
+
+--- 133.228.85.2 hping statistic ---
+5 packets transmitted, 0 packets received, 100% packet loss
+round-trip min/avg/max = 0.0/0.0/0.0 ms
+^C
+
+kali-133.228.98.1> ./smurfattacktcp.sh
+
+kali-133.228.98.1> HPING 133.228.85.3 (eth1 133.228.85.3): S set, 40 headers + 0 data bytesHPING 133.228.84.2 (eth1 133.228.84.2): S set, 40 headers + 0 data bytesHPING 133.228.86.1 (eth1 133.228.86.1): S set, 40 headers + 0 data bytesHPING 133.228.86.3 (eth1 133.228.86.3): S set, 40 headers + 0 data bytesHPING 133.228.87.1 (eth1 133.228.87.1): S set, 40 headers + 0 data bytesHPING 133.228.85.2 (eth1 133.228.85.2): S set, 40 headers + 0 data bytesHPING 133.228.85.1 (eth1 133.228.85.1): S set, 40 headers + 0 data bytesHPING 133.228.86.2 (eth1 133.228.86.2): S set, 40 headers + 0 data bytesHPING 133.228.84.3 (eth1 133.228.84.3): S set, 40 headers + 0 data bytes
+
+
+
+HPING 133.228.84.1 (eth1 133.228.84.1): S set, 40 headers + 0 data bytes
+
+
+
+
+
+
+
+
+
+
+--- 133.228.85.2 hping statistic ------ 133.228.85.1 hping statistic ---
+
+5 packets transmitted, 0 packets received, 100% packet loss
+5 packets transmitted, 0 packets received, 100% packet loss--- 133.228.86.1 hping statistic ---
+
+
+5 packets transmitted, 0 packets received, 100% packet lossround-trip min/avg/max = 0.0/0.0/0.0 msround-trip min/avg/max = 0.0/0.0/0.0 ms--- 133.228.84.2 hping statistic ---
+
+
+
+round-trip min/avg/max = 0.0/0.0/0.0 ms5 packets transmitted, 0 packets received, 100% packet loss
+
+round-trip min/avg/max = 0.0/0.0/0.0 ms
+--- 133.228.84.1 hping statistic ---
+5 packets transmitted, 0 packets received, 100% packet loss
+
+round-trip min/avg/max = 0.0/0.0/0.0 ms
+
+--- 133.228.86.2 hping statistic ---
+5 packets transmitted, 0 packets received, 100% packet loss--- 133.228.86.3 hping statistic ---
+
+round-trip min/avg/max = 0.0/0.0/0.0 ms5 packets transmitted, 0 packets received, 100% packet loss
+
+round-trip min/avg/max = 0.0/0.0/0.0 ms
+
+--- 133.228.85.3 hping statistic ---
+5 packets transmitted, 0 packets received, 100% packet loss
+
+round-trip min/avg/max = 0.0/0.0/0.0 ms
+--- 133.228.87.1 hping statistic ---
+5 packets transmitted, 0 packets received, 100% packet loss
+round-trip min/avg/max = 0.0/0.0/0.0 ms
+--- 133.228.84.3 hping statistic ---
+5 packets transmitted, 0 packets received, 100% packet loss
+round-trip min/avg/max = 0.0/0.0/0.0 ms
+^C
+
+kali-133.228.98.1>
+exit
+
+Script done on 2023-03-19 01:52:26-04:00 [COMMAND_EXIT_CODE="130"]

@@ -1,0 +1,757 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+
+int khan(char *str) {
+  char bx[736];
+  int n = 2;
+
+  strcpy(bx, str);
+  puts("khan");
+  return n;
+}
+
+int faisal(char *str) {
+  char fx[736];
+  int n = 1;
+
+  khan(str);
+  strcpy(fx, str);
+  puts("faisal");
+  return n;
+}
+
+int main() {
+  char x[128] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  FILE *fd;
+  int n;
+
+  //fd = fopen("badfile", "r");
+  //fread(x, sizeof(char), 128, fd);
+
+  n = faisal(x);
+
+  if (n == 1) {
+    printf("Returned properly\n");
+
+  } else {
+    printf("Improper return \n");
+  }
+
+  return 0;
+}
+      
+touch stack2.c
+nano stack2.c
+gcc -o stack2 stack2.c
+./stack2
+gcc -g -o stack2 -z execstack -fno-stack-protector stack2.c
+gdb stack2
+(gdb) b faisal
+(gdb) b khan
+run
+
+
+Breakpoint 1, faisal (str=0x7fffffffe340 "ABCDEFGHIJKLMNOPQRSTUVWXYZ") at stack2.c:17
+17        int n = 1;
+(gdb) p $rbp
+$1 = (void *) 0x7fffffffe330
+(gdb) p $rsp
+$2 = (void *) 0x7fffffffe030
+(gdb) x/2 0x7fffffffe330
+0x7fffffffe330: -7216   32767
+(gdb) x/2wx 0x7fffffffe330
+0x7fffffffe330: 0xffffe3d0      0x00007fff
+(gdb) x/2wx 0x7fffffffe338
+0x7fffffffe338: 0x555552c3      0x00005555
+(gdb) c
+Continuing.
+
+Breakpoint 2, khan (str=0x7fffffffe340 "ABCDEFGHIJKLMNOPQRSTUVWXYZ") at stack2.c:8
+8         int n = 2;
+(gdb) p $rbp
+$3 = (void *) 0x7fffffffe020
+(gdb) p $rsp
+$4 = (void *) 0x7fffffffdd20
+(gdb) x/2 0x7fffffffe020
+0x7fffffffe020: 0xffffe330      0x00007fff
+(gdb) x/2 0x7fffffffe028
+0x7fffffffe028: 0x555551df      0x00005555
+(gdb) set *0x7fffffffe020=0x5555555552c3
+(gdb) set *0x7fffffffe020=0x7fffffffe3d0
+(gdb) set *0x7fffffffe028=0x5555555552c3
+(gdb) c
+Continuing.
+khan
+Improper return
+[Inferior 1 (process 6468) exited normally]
+(gdb) q
+
+
+
+
+
+
+stack3:
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+
+int khan(char *str) {
+  FILE *fd;
+  char bx[736];
+  int n = 2;
+
+  fd = fopen("badfile", "r");
+  fread(bx, sizeof(char), 128, fd);
+
+  strcpy(str, bx);
+  puts("khan");
+  return n;
+}
+
+int faisal(char *str) {
+  char fx[736];
+  int n = 1;
+
+  khan(str);
+  puts("faisal");
+  return n;
+}
+
+int main() {
+  char x[128] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  FILE *fd;
+  int n;
+
+  n = faisal(x);
+
+  if (n == 1) {
+    printf("Returned properly\n");
+  } else {
+    printf("Improper return \n");
+  }
+
+  return 0;
+}
+
+
+
+
+genbadfile.c:
+
+#include <stdio.h>
+
+int main() {
+  FILE *fd;
+  char buf[752] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+-XXXXXXXXXXXX\x01\x00\x00\x00";
+  buf[736] = 0x20;
+  buf[737] = 0xE3;
+  buf[738] = 0xFF;
+  buf[739] = 0xFF;
+  buf[740] = 0xFF;
+  buf[741] = 0x7F;
+  buf[742] = 0x00;
+  buf[743] = 0x00;
+  buf[744] = 0x0F;
+  buf[745] = 0x53;
+  buf[746] = 0x55;
+  buf[747] = 0x55;
+  buf[748] = 0x55;
+  buf[749] = 0x55;
+  buf[750] = 0x00;
+  buf[751] = 0x00;
+ 
+  fd = fopen("badfile", "w");
+  fwrite(buf, sizeof(char), 736, fd);
+  fclose(fd);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+Bonus:
+
+
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+int bar(char *str) {
+  char bx[736];
+  int n = 2;
+
+  // Compute the stack address of bx
+  unsigned long bx_addr = (unsigned long)&bx;
+
+  // Compute the stack address of the return address of bar
+  unsigned long ret_addr = (unsigned long)__builtin_return_address(0);
+
+  // Corrupt the stack by overwriting the return address of bar
+  *(unsigned long*)(bx_addr + sizeof(bx) + 8) = ret_addr;
+
+  puts("bar");
+  return n;
+}
+
+int foo(char *str) {
+  char fx[736];
+  int n = 1;
+
+  // Compute the stack address of fx
+  unsigned long fx_addr = (unsigned long)&fx;
+
+  // Compute the stack address of the return address of foo
+  unsigned long ret_addr = (unsigned long)__builtin_return_address(0);
+
+  // Corrupt the stack by overwriting the return address of foo
+  *(unsigned long*)(fx_addr + sizeof(fx) + 8) = ret_addr;
+
+  // Corrupt the stack by overwriting the local variable of foo
+  strcpy((char*)(fx_addr - sizeof(fx)), "Stack Smashed!");
+
+  puts("foo");
+  return n;
+}
+
+int main() {
+  char x[128] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  int n;
+
+  n = foo(x);
+
+  if (n == 1) {
+    printf("Improper return\n");
+  } else {
+    printf("Returned properly\n");
+  }
+
+  return 0;
+}
+
+One thing I wish I knew before coming to UMBC is the abundance of research opportunities that can greatly accelerate my career. Through engaging in research projects, I could gain valuable hands-on experience, establish connections with faculty mentors, and enhance my critical thinking skills.
+Start with a random assignment of colors to each vertex using three colors.
+Repeat the following process for a certain number of iterations:
+For each vertex, consider the color assignment that maximizes the number of satisfied edges.
+Update the color assignment of each vertex based on the selected maximization.
+Output the final color assignment.
+The randomized nature of the algorithm allows it to explore different color assignments and iteratively improve the number of satisfied edges. On average, the algorithm is expected to achieve a solution that satisfies at least 1.5 times the number of edges as an optimal 3-coloring would.
+
+Analysis of the expected number of edges that are satisfied by your algorithm:
+
+Let OPT be the maximum number of edges that can be satisfied in an optimal 3-coloring.
+Let SAT be the number of satisfied edges achieved by our algorithm.
+The algorithm guarantees an expected approximation ratio of 1.5, meaning SAT ≥ (3/2) * OPT.
+The analysis of the expected number of satisfied edges considers the probability of each edge being satisfied during the random assignment process and the subsequent iterations of updating the color assignments.
+
+the analysis of the expected number of satisfied edges by the algorithm, it involves considering the probabilities of each edge being satisfied during the random assignment process and the subsequent iterations of updating the color assignments.
+
+Specifically, we can analyze the expected number of satisfied edges by considering the probability of each edge being satisfied at each step of the algorithm. By calculating the probabilities of satisfaction for all edges and summing them up, we can estimate the expected number of edges that will be satisfied by the algorithm.
+For each edge in the graph, determine the probability of it being satisfied under the random assignment. This probability depends on the current color assignments of the vertices connected by the edge.
+
+State and briefly justify the running time of your algorithm:
+
+The running time of the algorithm is O(V + E), where V is the number of vertices and E is the number of edges in the graph.
+Assigning colors to each vertex takes O(V) time, as we need to visit each vertex once.
+The iterative process involves considering the color assignment for each vertex and updating them based on maximizing the number of satisfied edges. Since we need to consider each edge once, this step takes O(E) time.
+Therefore, the overall running time of the algorithm is O(V + E), as the time complexities of the individual steps are added together.
+The algorithm achieves an expected approximation ratio of 1.5 by iteratively improving the number of satisfied edges through randomized color assignments and updates. The running time of the algorithm is proportional to the number of vertices and edges in the graph (O(V + E)).
+
+
+
+we see 4.3 and see the average PD its decreasing so thats y we are doing velocity for the pupil diameter and expalimn how we are calculating it i.e time 1.0. we normalize pupil diameter from the initial pupild diameter thats y it comes negative value.magnify dip
+
+The motivation for the pupil diameter velocity is to find the effective cognitive load when the pupil diameter is undergoing a particular task i.e. right cognitive load which changes pupil diameter under the various task which we have as cognitive load. To find the cognitive load, derivative of pupil diameter velocity will enhance the occurance of cognitive load and we can have clear idea when there is load on pupil for the tasks. The plot of the graph is for pupil diameter velocity, pupil diameter versus time. We analyse by plotting derivative of pupil diameter and by plotting pupil diameter and see how the stimulus time is plotted there because that stimulus time detects the cognitive load on pupil diameter fo given task. The derivative of pupil dimeter velocity gives broader picture to detect the cognitive load.
+As seen in the plot for VWM task, as plot decreases at stimulus time for pupil diameter, the derivative of pupil diameter velocity decreases further. And based of this derivative we can say that whenever derivative changes drastically(at stimulus time) we have cognitive load there. With this plot we can detect the cognitive load.
+Whereas in the plot for MA task, there are outliers in the plot. The correct decrement is not there as every single drop for pupil diameter, reduces drastically. so sometimes at that drop there is no cognitive load. Further analysis done on data and came to know that MA has missing data, therefore the derivative graph behaved like that. One way is to look at what correct velocity will give the right prediction of cognitive load there.
+
+From section 4.3, we see the constriction in PD at the initial ST. We want to magnify that constriction in PD, the derivative of PD gives us the magnified constriction in PD.
+
+The motivation for the pupil diameter velocity is to find the effective cognitive load when the pupil diameter is undergoing a particular task i.e. right cognitive load which changes pupil diameter under the various task which we have as cognitive load.
+
+From section 4.3, we see the constriction in PD at the initial ST. We want to magnify that constriction in PD, the derivative of PD gives us the magnified constriction in PD. The constriction in PD is because of the cognitive load. To find the cognitive load, derivative of pupil diameter magnifies the constriction in PD. The plot of the graph is for pupil diameter velocity, pupil diameter versus time. For the plot we normalize the PD by subtracting the initial PD with each PD. We calculate derivative of PD as difference of the PD upon time intervals of those PD considered. Not all the PD or Time is plotted as the plot will not be easy to analyse, so we consider 5000 samples. The difference of 2 consecutive time intervals of PD are 0.004s. We can select any of the time intervals like 0.004,0.08,0.1,1,.. for the derivative. For the difference of 0.004 we can not analyze the plot properly for ST. We should consider a good time interval difference, not too high nor too low. For VWM task I have considered time of 1s and for MA 0.1s/0.2s gave clear plot rather than 1s.
+As seen in the plot for VWM task, as plot decreases at stimulus time for pupil diameter i.e. contriction in PD, the derivative of pupil diameter velocity magnifies the decrease. And based of this derivative we can say that whenever derivative changes drastically(at stimulus time) we have cognitive load there. With this plot we can detect the cognitive load.
+Whereas in the plot for MA task, there are outliers in the plot. The correct decrement is not there as every single drop for pupil diameter, reduces drastically. so sometimes at that drop there is no cognitive load. Further analysis done on data and came to know that MA has missing data, therefore the derivative graph behaved like that. One way is to look at what correct velocity will give the right prediction of cognitive load there.
+
+
+"Pegasos: Primal Estimated sub-GrAdient SOlver for SVM" by Shalev-Shwartz et al. 
+
+
+
+
+import numpy as np
+
+def kmeans_cluster(data, num_clusters, Convergence_steps=100):
+    # Initializing cluster points as initial cluster centers randomly
+    cluster_centers = data[np.random.choice(len(data), num_clusters, replace=False)]
+    
+    objective_values = []  # Store objective function values
+    
+    for i in range(Convergence_steps):
+        # Assignment step
+        print("Iter:",i+1)
+        labels = find_cluster_points(data, cluster_centers)
+
+        #variance = np.var(data)
+
+        #print(f'Iteration {i+1}: Variance = {variance}')
+
+        plot_clusters(data, labels, centroids, i)
+
+        # Update step
+        new_centroids = update_centroids(data, labels, k)
+
+        # Calculate objective function value
+        objective = calculate_objective(data, labels, new_centroids)
+        objective_values.append(objective)
+
+        
+        
+
+        # Check for convergence i.e if the calculation of centroids are same as before then we stop
+        if np.all(centroids == new_centroids):
+            break
+
+        centroids = new_centroids
+        #
+        
+    
+    # Plot objective function values
+    plt.plot(range(len(objective_values)), objective_values)
+    plt.xlabel('Iteration')
+    plt.ylabel('Objective Function Value')
+    plt.title('K-means Objective Function')
+    plt.show()
+
+    return centroids, labels
+
+
+def assign_points(data, centroids):
+    labels = []
+    for point in data:
+        # Calculate distances to centroids
+        distances = [np.linalg.norm(point - centroid) for centroid in centroids]
+        #print(distances,"dist:")
+        # Assign the point to the nearest centroid
+        label = np.argmin(distances)
+        #print(label,"label:")
+        labels.append(label)
+    return np.array(labels)
+
+
+def update_centroids(data, labels, k):
+    new_centroids = []
+    for i in range(k):
+      #filtering individual label data
+        cluster_points = data[labels == i]
+        # Update centroid as the mean of the cluster points
+        centroid = cluster_points.mean(axis=0)
+        new_centroids.append(centroid)
+    return np.array(new_centroids)
+
+
+def calculate_objective(data, labels, centroids):
+    objective = 0
+    for i in range(len(data)):
+        cluster_idx = labels[i]
+        distance = np.linalg.norm(data[i] - centroids[cluster_idx])
+        objective += distance ** 2
+    return objective
+
+def plot_clusters(data, labels, centroids, iteration):
+    plt.scatter(data[:, 0], data[:, 1], c=labels)
+    plt.scatter(centroids[:, 0], centroids[:, 1], c='red', marker='x')
+    plt.xlabel('X')
+    plt.ylabel('Y')
+    plt.title(f'K-means Clustering Iteration {iteration+1}')
+    plt.show()
+k = 3  # Number of clusters
+data_numpy=data.values
+
+centroids, labels = kmeans(data_numpy, k)
+print(centroids,labels)
+'''
+plt.scatter(data[0], data[1], c=labels)
+plt.xlabel('X')
+plt.ylabel('Y')
+plt.title('K-means Clustering Results')
+plt.show()
+'''
+
+
+import numpy as np
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+from sklearn.cluster import KMeans
+
+# Generate 3D Gaussian data
+mean = [0, 0, 0]
+cov = [[1, 0, 0], [0, 1, 0], [0, 0, 1]]
+num_samples = 100
+np.random.seed(42)
+data = np.random.multivariate_normal(mean, cov, num_samples)
+
+# Perform K-means clustering
+num_clusters = 3  # Specify the number of clusters
+kmeans = KMeans(n_clusters=num_clusters)
+kmeans.fit(data)
+
+# Get the cluster labels and cluster centers
+labels = kmeans.labels_
+centers = kmeans.cluster_centers_
+
+# Plot the original data points and the cluster centers
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
+ax.scatter(data[:, 0], data[:, 1], data[:, 2], c=labels)
+ax.scatter(centers[:, 0], centers[:, 1], centers[:, 2], c='red', marker='X', s=100)
+ax.set_xlabel('X')
+ax.set_ylabel('Y')
+ax.set_zlabel('Z')
+ax.set_title('K-means Clustering on 3D Data')
+plt.show()
+
+
+
+import numpy as np
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+
+mean = [0, 0, 0]
+cov = [[1, 0, 0], [0, 1, 0], [0, 0, 1]]
+num_samples = 100
+
+np.random.seed(42)
+data = np.random.multivariate_normal(mean, cov, num_samples)
+
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
+ax.scatter(data[:, 0], data[:, 1], data[:, 2])
+ax.set_xlabel('X')
+ax.set_ylabel('Y')
+ax.set_zlabel('Z')
+ax.set_title('3D Gaussian Data')
+plt.show()
+
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+class KMeansCluster:
+    def __init__(self, num_clusters, convergence_steps=100):
+        self.num_clusters = num_clusters
+        self.convergence_steps = convergence_steps
+        self.cluster_centers = None
+        self.labels_class = None
+
+    def fit(self, data):
+        # Initializing cluster centers randomly
+        self.cluster_centers = data[np.random.randint(0, len(data), size=self.num_clusters)]
+
+        for i in range(self.convergence_steps):
+            # Assigning points to the respective cluster centers
+            print("Iter:", i + 1)
+            self.labels_class = self.find_cluster_points(data)
+
+            variance = np.var(data)
+            print(f'Iteration {i+1}: Variance = {variance}')
+
+            self._cluster_plot(data, self.labels_class, self.cluster_centers, i)
+
+            # Update cluster centers
+            new_cluster_centers = self._cluster_new_mean(data, self.labels_class)
+
+            # Check for convergence
+            if np.array_equal(self.cluster_centers, new_cluster_centers):
+                break
+
+            self.cluster_centers = new_cluster_centers
+
+    def _find_cluster_points(self, data):
+        label_class = []
+        for point in data:
+            # Calculate distances to cluster centers
+            diff = self.cluster_centers - point
+            squared_distance = np.sum(diff ** 2, axis=1)
+            Euclidean_distance = np.sqrt(squared_distance)
+
+            # Assign the point to the nearest cluster center
+            index = np.argmin(Euclidean_distance)
+            label_class.append(index)
+
+        return np.array(label_class)
+
+    def _cluster_plot(self, data, labels, cluster_centers, iter):
+        plt.scatter(data[:, 0], data[:, 1], c=labels)
+        plt.scatter(cluster_centers[:, 0], cluster_centers[:, 1], c='red', marker='x')
+        plt.xlabel('X')
+        plt.ylabel('Y')
+        plt.title(f'K-means Clustering Iteration {iter+1}')
+        plt.show()
+
+    def _cluster_new_mean(self, data, labels_class):
+        new_cluster_centers = []
+        for i in range(self.num_clusters):
+            # Filter individual label data
+            cluster_each = data[labels_class == i]
+
+            # Update cluster centers as the mean of the cluster points
+            cluster_center = np.mean(cluster_each, axis=0)
+            new_cluster_centers.append(cluster_center)
+
+        return np.array(new_cluster_centers)
+
+
+# Usage example
+#data = np.random.rand(100, 2)  # Example data
+kmeans = KMeansCluster(num_clusters=3, convergence_steps=100)
+data_n=data.values
+kmeans.fit(data_n)
+
+
+
+
+[Your Name]
+[Your Address]
+[City, State, ZIP Code]
+[Email Address]
+[Phone Number]
+[Date]
+
+[UMBC Dining]
+[UMBC Campus Address]
+[City, State, ZIP Code]
+
+Dear Hiring Manager,
+
+I am particularly excited about the opportunity to combine my interest in food and beverage as marketing intern for UMBC Dining. Throughout my academic and professional journey, I have developed a keen eye for aesthetics and a solid understanding of effective marketing strategies.
+Furthermore, my experiences as a member of IEEE and the Computer Society of India have fostered my teamwork, leadership, and communication skills, making me a valuable asset in a collaborative environment. Additionally, my enthusiasm for sports reflects my ability to balance multiple responsibilities, exhibit perseverance, and work effectively under pressure.
+I am confident that my strong non-technical skills, combined with my technical expertise and passion, make me an ideal fit for the marketing intern position at UMBC Dining. I am eager to contribute to the team's success, assist in event coordination, and engage with students to enhance their dining experience on campus.
+Thank you for considering my application. I would welcome the opportunity to further discuss how my qualifications align with the needs of UMBC Dining. Please find my enclosed resume for your review. I look forward to the possibility of contributing my skills and creativity to the team.
+
+Yours sincerely,
+Faisal Rasheed Khan
+
+
+Trim and present the best cover letter
+
+ChatGPT
+Dear Hiring Manager,
+
+I am writing to express my strong interest in the Marketing Intern position at Chartwells Higher Ed, located at the University of Maryland - Baltimore County. With a background in computer science, a passion for marketing, and a genuine interest in the food industry, I am confident that my skills and enthusiasm align well with the requirements of this role.
+
+As highlighted in my resume, I am currently pursuing a Master's degree in Computer Science at the University of Maryland, Baltimore County (UMBC). This technical background has equipped me with problem-solving abilities, attention to detail, and a creative mindset that are crucial for devising effective marketing strategies. Additionally, my experience as a Software Developer at Cognizant further enhanced my communication skills and strengthened my ability to work collaboratively within a team.
+
+Furthermore, my non-technical experiences have shaped me into a well-rounded individual with strong interpersonal skills and a customer-oriented mindset. As a student staff member at UMBC's Career for Well-being, I gained practical experience in maintaining a productive and supportive workplace while assisting students with their inquiries. Additionally, my volunteer work with the National Scheme Service (NSS) in India fostered my ability to connect with diverse groups of people and provide meaningful support to underprivileged children.
+
+I am thrilled about the opportunity to contribute to the on-campus dining experience at the University of Maryland - Baltimore County. I am eager to work closely with the Marketing Manager to implement and promote the dining program, utilizing my research skills, creativity, and knowledge of social media platforms. I believe in the power of effective marketing to engage target audiences and create memorable experiences.
+
+Furthermore, my technical skills, including proficiency in graphic design tools, will allow me to create visually appealing marketing materials that effectively communicate messages to the target market. I am confident in my ability to manage website and social media content, ensuring that our online presence aligns with the brand's vision.
+
+As a Marketing Intern, I am enthusiastic about spearheading various projects and expanding my knowledge base. I am committed to learning how to create and implement a comprehensive marketing plan, conduct market research to drive audience growth, and utilize multiple platforms and strategies to effectively promote the Chartwells Higher Ed brand.
+
+Thank you for considering my application. I am excited about the opportunity to contribute my skills, creativity, and passion to the dynamic environment at Chartwells Higher Ed. I look forward to the possibility of discussing how my qualifications align with your organization's goals and to further demonstrate my enthusiasm for this role.
+
+Please find my enclosed resume for your review. I am available for an interview at your convenience, and I can be reached via email or phone.
+
+Thank you for your time and consideration.
+
+Sincerely,
+
+[Your Name]
+
+
+Hello, My name is Faisal Rasheed Khan studying my Masters in Computer Science at University of Maryland Baltimore County. I am from India. I have 1.5 industry working experience at Cognizant where I have worked as a Programmer Analyst which involves developing applications and managing customer service. I am excited about the opportunity to work for Compass Group because it combines my skills and interests with their innovative approach to reinventing the on-campus dining experience. I have 1 month oncampus experience. I am eager to contribute to the dining program at the University of Maryland - Baltimore County and utilize my creativity and knowledge of social media platforms to engage the target market effectively. I have prior knowledge of handling the events and  I satisfy the job requirements
+
+
+I am a computer science graduate currently pursuing a Master's degree with a strong passion for marketing. I am excited about the opportunity to work for Compass Group because it combines my skills and interests with their innovative approach to reinventing the on-campus dining experience. I have industry working experience of 1.5 years which ensures that I have customer experience. With my experience of on-campus for the one month I have good experience of understanding various cultures of food and this will help me to organise the events. I am eager to contribute to the dining program at the University of Maryland - Baltimore County and utilize my creativity and knowledge of social media platforms to engage the target market effectively.
+
+
+I am a computer science graduate pursuing a Master's degree with a strong passion for marketing. The opportunity to work for Compass Group excites me as it aligns perfectly with my skills and interests, while their innovative approach to on-campus dining reinvention resonates with me. With 1.5 years of industry experience, I have developed valuable customer service skills. Additionally, my on-campus involvement has provided me with a deep understanding of diverse food cultures among the students. enabling me to effectively organize events. I am eager to contribute to the dining program at the University of Maryland - Baltimore County, utilizing my creativity and social media knowledge to engage the target market successfully.
+
+
+
+
+
+
+
+Hello, my name is Faisal Rasheed Khan, and I am currently pursuing my Masters in Computer Science at the University of Maryland Baltimore County. Originally from India, I have 1.5 years of industry experience as a Programmer Analyst at Cognizant, where I developed applications and provided customer service. I am particularly enthusiastic about the opportunity to work for Compass Group due to their innovative approach in reinventing the on-campus dining experience. With 1 month of on-campus experience, I am eager to contribute to the dining program at the University of Maryland - Baltimore County. Utilizing my creativity and knowledge of social media platforms, I am confident in my ability to effectively engage the target market. Furthermore, I have prior experience in event management, making me well-suited for the job requirements.
+
+
+
+During my previous role as a Programmer Analyst at Cognizant, we as a team encountered a situation where I received negative feedback on a project I was working on. The feedback highlighted some areas where the application I developed fell short of the client's expectations. Initially, I felt disappointed, but I understood the importance of using feedback as an opportunity for growth.
+
+We overcame by condcucting customer review on the application to detect the flaws and conducted surveys within our team about the application
+
+During a project at our undergraduate school, I received negative feedback on my project work, as it did not meet the faculty's expectations. To overcome this, I reflected on the feedback, sought additional input from students outside our team, conducted surveys, and analyzed the findings of our limitation. Based on the feedback, we implemented improvements and showcased our progress to the faculty. This experience taught me the importance of embracing feedback for personal growth and continuously improving my work.
+
+
+
+
+During a project at our undergraduate school, I took on the role of a team leader, responsible for designing and developing the application. One of the challenges I faced was effectively assigning tasks according to each team member's skills and capabilities. However, I enjoyed the collaborative nature of the project, as it allowed me to facilitate brainstorming sessions and witness the collective efforts of the team coming together to achieve a successful outcome. I enjoyed generating new ideas from these collaborative sessions. This experience highlighted the significance of teamwork, effective communication, and individual strengths to accomplish a shared objective.
+
+
+I have taken 2 of my favourite cources Algorithms, MAchine Learning . First of all both are mandatory courses to complete besides that i have interest in coding and mathematics. I am passionate about these courses. Coming to the third subject,Computer security i selected that because of out of choice coz all other classes were filled, i wanted to take Computer graphics 
+
+
+
+
+Good Evening Sir,
+
+I am writing to express my heartfelt gratitude for your guidance and mentorship throughout the "Design and Analysis of Algorithms" course. Under your teachings, I was able to effectively  overcome the challenges presented in this subject matter.
+
+Your lectures and engaging teaching style truly made the course content valuable and understandable. The homeworks and exams during the course allowed me to apply the concepts learned and enhance my understanding of the subject. Your continuous support and valuable feedback have been good for me. 
+
+I am delighted to inform you that I have gained a substantial amount of knowledge through this course. Your expertise and passion for the subject made it both accessible and enjoyable. I genuinely appreciate your efforts in making this subject easier.
+
+Once again, I would like to extend my sincere appreciation for your dedication, patience, and commitment to our learning experience. Thank you for your invaluable contribution to my academic journey.
+
+I would also like to thank teaching assistant(Abhishek) for the dedication and hard work throughout the course. His valuable feedback on my homeworks significantly enhanced my learning experience.
+
+Yours sincerely,
+Faisal Rasheed Khan
+VB02734
+
+
+
+
+• Actively assisted the trainer and faculty during the "Training on How to tackle Coding Interviews (Algorithms)" conducted by Smart Interviews in 2020, providing support in delivering the course content and assisting students with understanding and implementing algorithms effectively.
+
+
+My Journey:
+I am a passionate Computer Science professional with a strong academic background and 1.5 years of experience as a Software Developer. Currently pursuing my Master's degree in Computer Science at the University of Maryland, Baltimore County, I am dedicated to enhancing my skills and excelling in the field.
+
+Throughout my educational journey, I have gained expertise in various programming languages such as C, C++, Java, HTML, CSS, PHP, Python, JavaScript, and R. Additionally, I have developed proficiency in key areas including data structures and algorithms, database management (MySQL, PL/SQL, MS Access, Oracle DBMS), and software tools like Microsoft Office and Adobe Photoshop.
+
+My passion lies in exploring cutting-edge technologies and their applications. I have a keen interest in areas like Machine Learning, Data Mining, Artificial Intelligence, Data Science. I have been involved in several projects that demonstrate my practical skills and knowledge in these areas. These projects include developing a crawler-based search engine, a pay-per-use online streaming platform, computer vision projects for object recognition and license plate recognition, and implementing machine learning models for cognitive load detection.
+
+In addition to my academic pursuits, I have actively participated in various workshops and training programs, gaining certifications in programming languages, networking, LabView software, IoT, and coding interview preparation. These experiences have enriched my technical skills and helped me stay updated with the latest industry trends.
+
+During my work experience as a Programmer Analyst at Cognizant and as a Salesforce Developer, I contributed to projects involving object creation, automation requests, process building, LWC components, Visual Force Pages, and Apex classes. My attention to detail and commitment to quality have ensured the successful delivery of high-quality software solutions.
+
+I was a member of IEEE and the Computer Society of India (CSI). Outside of my academic and professional life, I have also volunteered with the National Scheme Service (NSS) and have a strong passion for sports and intellectual development.
+
+On Handshake, I am seeking new job opportunities that align with my skills, knowledge, and passion for computer science. I am eager to contribute to innovative projects, collaborate with talented professionals, and continue my professional growth in a challenging and rewarding work environment.
+
+In summary, I am a motivated Computer Science student with a diverse skill set, practical experience, and a drive to excel in my field. I am excited to embark on new opportunities that allow me to apply my knowledge, contribute to meaningful projects, and further expand my skills.
+
+
+
+Summary:
+I am a dedicated and passionate Computer Science professional with 1.5 years of experience as a Programmer Analyst and currently pursuing a Master's degree in Computer Science at the University of Maryland, Baltimore County. My expertise includes programming languages such as C, C++, Java, HTML, CSS, PHP, Python, JavaScript, and R, along with proficiency in data structures & algorithms and database management.
+
+My passion lies in exploring cutting-edge technologies, particularly in the fields of Machine Learning, Data Mining, Artificial Intelligence, and Data Science. I have hands-on experience in developing projects like a crawler-based search engine, a pay-per-use online streaming platform, and computer vision applications for object recognition and license plate recognition. Additionally, I have implemented machine learning models for cognitive load detection.
+
+I have actively participated in workshops and obtained certifications in various areas, including programming languages, networking, LabView software, IoT, and coding interview preparation. These experiences have enhanced my technical skills and kept me updated with industry trends.
+
+During my professional experience as a Programmer Analyst at Cognizant and a Salesforce Developer, I have contributed to projects involving object creation, automation requests, process building, and software quality assurance. My attention to detail and commitment to delivering high-quality solutions have been key to my success.
+
+As an active member of professional organizations like IEEE and CSI, I have demonstrated my dedication to the field of Computer Science. I have also volunteered with the National Scheme Service (NSS) and have a strong passion for sports and intellectual development.
+
+I am currently seeking new job opportunities through Handshake that align with my skills, knowledge, and passion for computer science. I am eager to contribute to innovative projects, collaborate with talented professionals, and continue my professional growth in a challenging and rewarding work environment.
+
+In summary, I am a motivated and skilled Computer Science professional, driven to excel in my field. I am excited to leverage my knowledge and experience in meaningful projects and further expand my skills.
+
+
+
+
+[Your Name]
+[Your Address]
+[City, State, ZIP Code]
+[Email Address]
+[Phone Number]
+[Date]
+
+[Bookstore Name]
+[Store Address]
+[City, State, ZIP Code]
+
+Dear Hiring Manager,
+
+I am writing to express my strong interest in the Cashier position at the bookstore of the University of Maryland, Baltimore County (UMBC). With my academic background in Computer Science, professional experience as a Software Developer, and previous cashier experience, I believe I possess the skills and qualities necessary to excel in this role.
+
+Throughout my career, I have developed a keen eye for detail, exceptional organizational skills, and the ability to handle high volumes of transactions accurately. As a Software Developer, I have gained valuable experience in maintaining data integrity and ensuring precise documentation. I am confident that these skills will enable me to handle cash, checks, and credit cards efficiently and accurately as a cashier at your bookstore.
+
+In addition to my technical skills, I am a dedicated and customer-focused individual. During my previous cashier experience in India, I consistently provided exceptional customer service, assisting customers with their purchases and answering their inquiries. I am comfortable working in a fast-paced environment and have the ability to remain calm under pressure. Moreover, my previous experience in maintaining the workplace and assisting students at the Career for Well-being at UMBC demonstrates my commitment to creating a positive and welcoming environment for both customers and colleagues.
+
+I am also well-versed in utilizing technology to streamline processes. With my proficiency in various software applications, including Microsoft Office, I can quickly adapt to your store's inventory control system and efficiently process documents when receiving shipments. Furthermore, my familiarity with social media platforms can contribute to the bookstore's social media efforts, helping to engage and connect with the UMBC community.
+
+I am confident that my technical expertise, cashier experience, and dedication to customer service make me an excellent fit for the Cashier position at your bookstore. I am eager to contribute to the success of the store, assist customers with their needs, and ensure a positive shopping experience.
+
+Thank you for considering my application. I have attached my resume for your review, which provides further details on my qualifications. I would welcome the opportunity to discuss how my skills and experiences align with the needs of your bookstore. Please feel free to contact me at your convenience.
+
+Thank you for your time and consideration.
+
+Sincerely,
+
+[Your Name]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

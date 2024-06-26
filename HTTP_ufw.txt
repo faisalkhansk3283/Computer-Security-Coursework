@@ -1,0 +1,174 @@
+kali-133.228.98.1> while true; do wget http://133.228.98.3; sleep 6; done
+--2023-04-16 02:36:38--  http://133.228.98.3/
+Connecting to 133.228.98.3:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 10918 (11K) [text/html]
+Saving to: ‘index.html’
+
+index.html                    100%[=================================================>]  10.66K  --.-KB/s    in 0s
+
+2023-04-16 02:36:38 (151 MB/s) - ‘index.html’ saved [10918/10918]
+
+--2023-04-16 02:36:44--  http://133.228.98.3/
+Connecting to 133.228.98.3:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 10918 (11K) [text/html]
+Saving to: ‘index.html.1’
+
+index.html.1                  100%[=================================================>]  10.66K  --.-KB/s    in 0s
+
+2023-04-16 02:36:44 (157 MB/s) - ‘index.html.1’ saved [10918/10918]
+
+--2023-04-16 02:36:50--  http://133.228.98.3/
+Connecting to 133.228.98.3:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 10918 (11K) [text/html]
+Saving to: ‘index.html.2’
+
+index.html.2                  100%[=================================================>]  10.66K  --.-KB/s    in 0s
+
+2023-04-16 02:36:50 (160 MB/s) - ‘index.html.2’ saved [10918/10918]
+
+--2023-04-16 02:36:56--  http://133.228.98.3/
+Connecting to 133.228.98.3:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 10918 (11K) [text/html]
+Saving to: ‘index.html.3’
+
+index.html.3                  100%[=================================================>]  10.66K  --.-KB/s    in 0s
+
+2023-04-16 02:36:56 (142 MB/s) - ‘index.html.3’ saved [10918/10918]
+
+--2023-04-16 02:37:02--  http://133.228.98.3/
+Connecting to 133.228.98.3:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 10918 (11K) [text/html]
+Saving to: ‘index.html.4’
+
+index.html.4                  100%[=================================================>]  10.66K  --.-KB/s    in 0s
+
+2023-04-16 02:37:02 (131 MB/s) - ‘index.html.4’ saved [10918/10918]
+
+--2023-04-16 02:37:08--  http://133.228.98.3/
+Connecting to 133.228.98.3:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 10918 (11K) [text/html]
+Saving to: ‘index.html.5’
+
+index.html.5                  100%[=================================================>]  10.66K  --.-KB/s    in 0s
+
+2023-04-16 02:37:08 (137 MB/s) - ‘index.html.5’ saved [10918/10918]
+
+--2023-04-16 02:37:14--  http://133.228.98.3/
+Connecting to 133.228.98.3:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 10918 (11K) [text/html]
+Saving to: ‘index.html.6’
+
+index.html.6                  100%[=================================================>]  10.66K  --.-KB/s    in 0s
+
+2023-04-16 02:37:14 (137 MB/s) - ‘index.html.6’ saved [10918/10918]
+
+--2023-04-16 02:37:20--  http://133.228.98.3/
+Connecting to 133.228.98.3:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 10918 (11K) [text/html]
+Saving to: ‘index.html.7’
+
+index.html.7                  100%[=================================================>]  10.66K  --.-KB/s    in 0s
+
+2023-04-16 02:37:20 (91.6 MB/s) - ‘index.html.7’ saved [10918/10918]
+
+--2023-04-16 02:37:26--  http://133.228.98.3/
+Connecting to 133.228.98.3:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 10918 (11K) [text/html]
+Saving to: ‘index.html.8’
+
+index.html.8                  100%[=================================================>]  10.66K  --.-KB/s    in 0s
+
+2023-04-16 02:37:26 (109 MB/s) - ‘index.html.8’ saved [10918/10918]
+
+--2023-04-16 02:37:32--  http://133.228.98.3/
+Connecting to 133.228.98.3:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 10918 (11K) [text/html]
+Saving to: ‘index.html.9’
+
+index.html.9                  100%[=================================================>]  10.66K  --.-KB/s    in 0s
+
+2023-04-16 02:37:32 (119 MB/s) - ‘index.html.9’ saved [10918/10918]
+
+^C
+
+kali-133.228.98.1> while true; do wget http://133.228.98.3; sleep 4; done
+--2023-04-16 02:40:59--  http://133.228.98.3/
+Connecting to 133.228.98.3:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 10918 (11K) [text/html]
+Saving to: ‘index.html.10’
+
+index.html.10                 100%[=================================================>]  10.66K  --.-KB/s    in 0s
+
+2023-04-16 02:40:59 (165 MB/s) - ‘index.html.10’ saved [10918/10918]
+
+--2023-04-16 02:41:03--  http://133.228.98.3/
+Connecting to 133.228.98.3:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 10918 (11K) [text/html]
+Saving to: ‘index.html.11’
+
+index.html.11                 100%[=================================================>]  10.66K  --.-KB/s    in 0s
+
+2023-04-16 02:41:03 (132 MB/s) - ‘index.html.11’ saved [10918/10918]
+
+--2023-04-16 02:41:07--  http://133.228.98.3/
+Connecting to 133.228.98.3:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 10918 (11K) [text/html]
+Saving to: ‘index.html.12’
+
+index.html.12                 100%[=================================================>]  10.66K  --.-KB/s    in 0s
+
+2023-04-16 02:41:07 (146 MB/s) - ‘index.html.12’ saved [10918/10918]
+
+--2023-04-16 02:41:11--  http://133.228.98.3/
+Connecting to 133.228.98.3:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 10918 (11K) [text/html]
+Saving to: ‘index.html.13’
+
+index.html.13                 100%[=================================================>]  10.66K  --.-KB/s    in 0s
+
+2023-04-16 02:41:11 (134 MB/s) - ‘index.html.13’ saved [10918/10918]
+
+--2023-04-16 02:41:15--  http://133.228.98.3/
+Connecting to 133.228.98.3:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 10918 (11K) [text/html]
+Saving to: ‘index.html.14’
+
+index.html.14                 100%[=================================================>]  10.66K  --.-KB/s    in 0s
+
+2023-04-16 02:41:15 (73.3 MB/s) - ‘index.html.14’ saved [10918/10918]
+
+--2023-04-16 02:41:19--  http://133.228.98.3/
+Connecting to 133.228.98.3:80... failed: Connection refused.
+--2023-04-16 02:41:23--  http://133.228.98.3/
+Connecting to 133.228.98.3:80... failed: Connection refused.
+--2023-04-16 02:41:27--  http://133.228.98.3/
+Connecting to 133.228.98.3:80... failed: Connection refused.
+--2023-04-16 02:41:31--  http://133.228.98.3/
+Connecting to 133.228.98.3:80... failed: Connection refused.
+--2023-04-16 02:41:35--  http://133.228.98.3/
+Connecting to 133.228.98.3:80... failed: Connection refused.
+--2023-04-16 02:41:39--  http://133.228.98.3/
+Connecting to 133.228.98.3:80... failed: Connection refused.
+--2023-04-16 02:41:43--  http://133.228.98.3/
+Connecting to 133.228.98.3:80... failed: Connection refused.
+--2023-04-16 02:41:47--  http://133.228.98.3/
+Connecting to 133.228.98.3:80... failed: Connection refused.
+--2023-04-16 02:41:51--  http://133.228.98.3/
+Connecting to 133.228.98.3:80... failed: Connection refused.
+^C
+

